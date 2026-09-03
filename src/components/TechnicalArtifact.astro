@@ -9,7 +9,7 @@ const { kind } = Astro.props;
 ---
 
 {kind === "pipeline" && (
-	<svg class="technical-artifact" viewBox="0 0 640 190" role="img" aria-labelledby="pipeline-title pipeline-desc">
+	<svg class="technical-artifact" viewBox="0 0 565 200" role="img" aria-labelledby="pipeline-title pipeline-desc">
 		<title id="pipeline-title">Registry export pipeline</title>
 		<desc id="pipeline-desc">Extract, transform, Parquet and S3 stages with validation and StarRocks relationships.</desc>
 		<defs>
@@ -50,8 +50,8 @@ const { kind } = Astro.props;
 
 {kind === "search" && (
 	<svg class="technical-artifact" viewBox="0 0 640 220" role="img" aria-labelledby="search-title search-desc">
-		<title id="search-title">Hybrid search evidence</title>
-		<desc id="search-desc">Search field, query understanding, candidate retrieval, entity resolution, ranking and result traces.</desc>
+		<title id="search-title">Illustrative hybrid search flow</title>
+		<desc id="search-desc">An example query proceeds through query understanding, candidate retrieval, entity resolution and ranking. The output associates a matched entity with an alias, identifier and source record. This is not an interactive search field.</desc>
 		<defs>
 			<marker id="search-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
 				<path d="M0,0 L7,3.5 L0,7" class="artifact-arrowhead" />
@@ -79,17 +79,15 @@ const { kind } = Astro.props;
 			<text x="365" y="86" text-anchor="middle"><tspan x="365">ENTITY</tspan><tspan x="365" dy="14">RESOLUTION</tspan></text>
 			<text x="513" y="95" text-anchor="middle">RANKING</text>
 		</g>
-		<g class="search-results">
-			<circle cx="17" cy="151" r="6" />
-			<rect x="35" y="144" width="315" height="12" />
-			<rect x="446" y="144" width="128" height="12" />
-			<circle cx="17" cy="178" r="6" />
-			<rect x="35" y="171" width="286" height="12" />
-			<rect x="336" y="171" width="72" height="12" />
-			<rect x="446" y="171" width="128" height="12" />
-			<circle cx="17" cy="205" r="6" />
-			<rect x="35" y="198" width="244" height="12" />
-			<rect x="446" y="198" width="128" height="12" />
+		<g class="artifact-lines">
+			<path d="M513 120 V142 H18 V157" />
+			<line x1="8" y1="177" x2="598" y2="177" />
+		</g>
+		<g class="artifact-labels">
+			<text x="8" y="169">MATCHED ENTITY</text>
+			<text x="316" y="169">SUPPORTING RECORD</text>
+			<text class="artifact-placeholder" x="8" y="204">alias · identifier</text>
+			<text class="artifact-placeholder" x="316" y="204">source · record ID</text>
 		</g>
 	</svg>
 )}
@@ -97,7 +95,7 @@ const { kind } = Astro.props;
 {kind === "graph" && (
 	<svg class="technical-artifact" viewBox="0 0 640 220" role="img" aria-labelledby="graph-title graph-desc">
 		<title id="graph-title">Semantic system graph</title>
-		<desc id="graph-desc">A restrained system relationship graph with labeled entities and a metadata field.</desc>
+		<desc id="graph-desc">Illustrative relationships among a wallet, transaction, contract, event and protocol, with source, relation and context fields. Not a verified SemTrace architecture.</desc>
 		<g class="artifact-lines">
 			<line x1="84" y1="36" x2="154" y2="92" />
 			<line x1="119" y1="128" x2="154" y2="92" />
@@ -125,22 +123,22 @@ const { kind } = Astro.props;
 			<circle cx="96" cy="181" r="7" />
 			<circle cx="151" cy="18" r="7" />
 		</g>
-		<g class="graph-labels">
-			<rect x="49" y="51" width="54" height="9" />
-			<rect x="98" y="143" width="52" height="9" />
-			<rect x="164" y="101" width="66" height="9" />
-			<rect x="188" y="33" width="44" height="9" />
-			<rect x="246" y="151" width="52" height="9" />
-			<rect x="275" y="59" width="60" height="9" />
-			<rect x="345" y="125" width="46" height="9" />
+		<g class="artifact-labels">
+			<text x="38" y="21">WALLET</text>
+			<text x="24" y="151">TRANSACTION</text>
+			<text x="167" y="101">CONTRACT</text>
+			<text x="188" y="33">EVENT</text>
+			<text x="246" y="162">PROTOCOL</text>
+			<text x="275" y="59">ENTITY</text>
 		</g>
-		<rect class="artifact-box" x="466" y="36" width="150" height="150" />
-		<g class="graph-metadata">
-			<rect x="482" y="55" width="85" height="10" />
-			<rect x="482" y="78" width="55" height="10" />
-			<rect x="482" y="101" width="115" height="10" />
-			<rect x="482" y="124" width="96" height="10" />
-			<rect x="482" y="147" width="117" height="10" />
+		<line class="artifact-line" x1="452" y1="26" x2="452" y2="202" />
+		<g class="artifact-labels">
+			<text x="474" y="48">RELATION</text>
+			<text class="artifact-placeholder" x="474" y="71">entity → entity</text>
+			<text x="474" y="108">SOURCE</text>
+			<text class="artifact-placeholder" x="474" y="131">on-chain event</text>
+			<text x="474" y="168">CONTEXT</text>
+			<text class="artifact-placeholder" x="474" y="191">semantic model</text>
 		</g>
 	</svg>
 )}

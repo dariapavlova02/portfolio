@@ -340,6 +340,20 @@ a:focus-visible {
 	scroll-margin-top: 1rem;
 }
 
+.project-row--pipeline {
+	min-height: 310px;
+}
+
+.project-row--search {
+	min-height: 360px;
+	padding-block: 2.5rem;
+}
+
+.project-row--graph {
+	min-height: 340px;
+	padding-block: 2.25rem;
+}
+
 .project-number {
 	grid-column: 1;
 	margin: -0.35rem 0 0;
@@ -355,6 +369,7 @@ a:focus-visible {
 	grid-column: 2 / span 4;
 	flex-direction: column;
 	padding-right: clamp(0rem, 1vw, 1rem);
+	min-width: 0;
 }
 
 .project-copy h3 {
@@ -362,10 +377,14 @@ a:focus-visible {
 	font-size: clamp(1.55rem, 2.05vw, 2.15rem);
 }
 
+.project-row--search .project-copy h3 {
+	max-width: 22rem;
+}
+
 .project-description {
 	max-width: 27rem;
 	margin: 1.15rem 0 1.5rem;
-	font-size: 0.93rem;
+	font-size: 1rem;
 	line-height: 1.55;
 }
 
@@ -373,9 +392,10 @@ a:focus-visible {
 	display: flex;
 	align-items: center;
 	gap: 1.3rem;
+	flex-wrap: wrap;
 	margin-top: auto;
 	font-family: var(--mono);
-	font-size: 0.7rem;
+	font-size: 0.75rem;
 	font-weight: 500;
 	letter-spacing: 0.04em;
 	text-transform: uppercase;
@@ -394,17 +414,41 @@ a:focus-visible {
 .project-artifact {
 	display: flex;
 	grid-column: 7 / 13;
-	align-items: center;
+	flex-direction: column;
+	justify-content: center;
 	min-width: 0;
+	margin: 0;
 	border-left: 1px solid var(--soft-rule);
 	padding-left: clamp(2rem, 4vw, 4.5rem);
+}
+
+.artifact-canvas {
+	width: 100%;
+	overflow-x: auto;
+}
+
+.artifact-canvas:focus-visible {
+	outline: 1px solid var(--ink);
+	outline-offset: 4px;
+}
+
+.project-artifact figcaption {
+	margin-top: 1.2rem;
+	font-family: var(--mono);
+	font-size: 0.75rem;
+	line-height: 1.5;
+}
+
+.project-artifact figcaption span {
+	color: var(--muted);
 }
 
 .technical-artifact {
 	display: block;
 	width: 100%;
+	max-width: 42rem;
+	min-width: 32rem;
 	height: auto;
-	overflow: visible;
 }
 
 .artifact-lines,
@@ -429,18 +473,12 @@ a:focus-visible {
 .artifact-labels,
 .artifact-placeholder {
 	font-family: var(--mono);
-	font-size: 11px;
+	font-size: 14px;
 	fill: var(--ink);
 }
 
 .artifact-placeholder {
 	fill: var(--muted);
-}
-
-.search-results,
-.graph-labels,
-.graph-metadata {
-	fill: var(--light-fill);
 }
 
 .graph-nodes circle {
@@ -460,15 +498,15 @@ a:focus-visible {
 	grid-template-columns: repeat(12, minmax(0, 1fr));
 	column-gap: var(--grid-gap);
 	align-items: center;
-	min-height: 150px;
+	min-height: 132px;
 	border-bottom: 1px solid var(--rule);
 }
 
 .more-work-mark {
 	display: grid;
 	grid-column: 1;
-	width: 4rem;
-	height: 4rem;
+	width: 3.5rem;
+	height: 3.5rem;
 	border: 1px solid var(--rule);
 	place-items: center;
 	font-size: 2.6rem;
@@ -479,9 +517,9 @@ a:focus-visible {
 .more-work p {
 	grid-column: 2 / span 4;
 	margin: 0;
-	font-family: var(--serif);
-	font-size: clamp(1.2rem, 1.7vw, 1.65rem);
-	line-height: 1.25;
+	font-family: var(--sans);
+	font-size: 1rem;
+	line-height: 1.5;
 }
 
 .more-work .arrow-link {
@@ -493,9 +531,9 @@ a:focus-visible {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	min-height: 82px;
+	min-height: 72px;
 	font-family: var(--mono);
-	font-size: 0.72rem;
+	font-size: 0.75rem;
 	letter-spacing: 0.035em;
 }
 
@@ -739,8 +777,12 @@ a:focus-visible {
 	}
 
 	.project-copy {
-		min-height: 255px;
+		min-height: 0;
 		padding: 0;
+	}
+
+	.project-links {
+		margin-top: 0.5rem;
 	}
 
 	.project-copy h3 {
@@ -783,7 +825,7 @@ a:focus-visible {
 		flex-direction: column;
 		justify-content: center;
 		gap: 1rem;
-		min-height: 122px;
+		min-height: 104px;
 	}
 
 	.site-footer nav {
