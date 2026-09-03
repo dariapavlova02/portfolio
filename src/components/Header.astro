@@ -1,0 +1,38 @@
+---
+import { siteConfig } from "../config";
+
+interface Props {
+	current?: "home" | "work" | "notes" | "about";
+}
+
+const { current = "home" } = Astro.props;
+
+const navigation = [
+	{ label: "Work", href: current === "home" ? "#work" : "/work", key: "work" },
+	{ label: "Notes", href: "/notes", key: "notes" },
+	{ label: "About", href: "/about", key: "about" },
+	{ label: "GitHub", href: siteConfig.githubUrl, external: true },
+	{ label: "CV", href: siteConfig.cvUrl },
+	{ label: "Email", href: siteConfig.contactUrl },
+];
+---
+
+<header class="site-header page-frame">
+	<a class="site-name" href="/" aria-label="Daria Pavlova, home">Daria Pavlova</a>
+	<nav aria-label="Primary navigation">
+		<ul class="site-nav">
+			{navigation.map((item) => (
+				<li>
+					<a
+						href={item.href}
+						aria-current={item.key === current ? "page" : undefined}
+						target={item.external ? "_blank" : undefined}
+						rel={item.external ? "noreferrer" : undefined}
+					>
+						{item.label}{item.label === "CV" ? " ↗" : ""}
+					</a>
+				</li>
+			))}
+		</ul>
+	</nav>
+</header>

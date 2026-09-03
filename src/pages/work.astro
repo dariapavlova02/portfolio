@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import ProjectRow from "../components/ProjectRow.astro";
+import { projects } from "../data/projects";
+---
+
+<BaseLayout title="Work — Daria Pavlova" description="Selected data infrastructure, search and semantic systems work by Daria Pavlova.">
+	<Header current="work" />
+	<main id="main-content" class="interior-page page-frame">
+		<header class="interior-intro">
+			<p class="eyebrow">Work</p>
+			<h1>Systems, evidence{" "}<br />and engineering decisions.</h1>
+			<p>Project content is provisional while the final case studies and repositories are assembled.</p>
+		</header>
+		<section class="project-list" aria-label="Projects">
+			{projects.map((project) => <ProjectRow project={project} />)}
+		</section>
+	</main>
+	<Footer />
+</BaseLayout>

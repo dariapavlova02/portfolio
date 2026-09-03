@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+---
+
+<BaseLayout title="About — Daria Pavlova" description="Professional background, experience and education of data engineer Daria Pavlova.">
+	<Header current="about" />
+	<main id="main-content" class="interior-page page-frame">
+		<header class="interior-intro interior-intro--wide">
+			<p class="eyebrow">About</p>
+			<h1>I work on systems where data scale, retrieval quality and correctness become engineering constraints.</h1>
+		</header>
+
+		<section class="records-section" aria-labelledby="experience-title">
+			<h2 class="mono-label" id="experience-title">Experience</h2>
+			<article class="professional-record">
+				<p class="record-date">2026 — Now</p>
+				<div>
+					<p class="mono-label">iPay.ua</p>
+					<h3>Data Engineer</h3>
+				</div>
+				<div class="record-detail">
+					<p>Large-scale transaction and regulatory data infrastructure.</p>
+					<a href="/work#nbu-registry-export">Selected work → NBU Registry Export</a>
+				</div>
+			</article>
+		</section>
+
+		<section class="records-section" aria-labelledby="education-title">
+			<h2 class="mono-label" id="education-title">Education</h2>
+			<article class="professional-record">
+				<p class="record-date">MSc</p>
+				<div>
+					<p class="mono-label">Jožef Stefan International Postgraduate School</p>
+					<h3>Information and Communication Technologies</h3>
+				</div>
+				<div class="record-detail">
+					<p>Research context and dates will be added with the final professional record.</p>
+				</div>
+			</article>
+		</section>
+
+		<section class="utility-record" id="cv" aria-labelledby="cv-title">
+			<h2 class="mono-label" id="cv-title">CV</h2>
+			<p>The downloadable CV will be connected here when the final file is supplied.</p>
+		</section>
+
+		<section class="utility-record" id="contact" aria-labelledby="contact-title">
+			<h2 class="mono-label" id="contact-title">Contact</h2>
+			<p>The public email address will be connected here before launch.</p>
+		</section>
+	</main>
+	<Footer />
+</BaseLayout>

@@ -1,0 +1,146 @@
+---
+import type { ArtifactKind } from "../data/projects";
+
+interface Props {
+	kind: ArtifactKind;
+}
+
+const { kind } = Astro.props;
+---
+
+{kind === "pipeline" && (
+	<svg class="technical-artifact" viewBox="0 0 640 190" role="img" aria-labelledby="pipeline-title pipeline-desc">
+		<title id="pipeline-title">Registry export pipeline</title>
+		<desc id="pipeline-desc">Extract, transform, Parquet and S3 stages with validation and StarRocks relationships.</desc>
+		<defs>
+			<marker id="pipeline-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+				<path d="M0,0 L7,3.5 L0,7" class="artifact-arrowhead" />
+			</marker>
+		</defs>
+		<g class="artifact-lines" marker-end="url(#pipeline-arrow)">
+			<line x1="112" y1="50" x2="158" y2="50" />
+			<line x1="259" y1="50" x2="305" y2="50" />
+			<line x1="406" y1="50" x2="452" y2="50" />
+		</g>
+		<g class="artifact-lines artifact-lines--secondary">
+			<line x1="74" y1="74" x2="157" y2="134" />
+			<line x1="212" y1="74" x2="177" y2="134" />
+			<line x1="353" y1="74" x2="407" y2="134" />
+			<line x1="505" y1="74" x2="445" y2="134" />
+			<line x1="230" y1="153" x2="374" y2="153" />
+		</g>
+		<g class="artifact-boxes">
+			<rect x="12" y="28" width="100" height="46" />
+			<rect x="159" y="28" width="100" height="46" />
+			<rect x="306" y="28" width="100" height="46" />
+			<rect x="453" y="28" width="100" height="46" />
+			<rect x="112" y="134" width="118" height="40" />
+			<rect x="374" y="134" width="118" height="40" />
+		</g>
+		<g class="artifact-labels">
+			<text x="62" y="55" text-anchor="middle">EXTRACT</text>
+			<text x="209" y="55" text-anchor="middle">TRANSFORM</text>
+			<text x="356" y="55" text-anchor="middle">PARQUET</text>
+			<text x="503" y="55" text-anchor="middle">S3</text>
+			<text x="171" y="158" text-anchor="middle">VALIDATION</text>
+			<text x="433" y="158" text-anchor="middle">STARROCKS</text>
+		</g>
+	</svg>
+)}
+
+{kind === "search" && (
+	<svg class="technical-artifact" viewBox="0 0 640 220" role="img" aria-labelledby="search-title search-desc">
+		<title id="search-title">Hybrid search evidence</title>
+		<desc id="search-desc">Search field, query understanding, candidate retrieval, entity resolution, ranking and result traces.</desc>
+		<defs>
+			<marker id="search-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+				<path d="M0,0 L7,3.5 L0,7" class="artifact-arrowhead" />
+			</marker>
+		</defs>
+		<rect class="artifact-box" x="8" y="8" width="590" height="38" />
+		<line class="artifact-line" x1="548" y1="8" x2="548" y2="46" />
+		<text class="artifact-placeholder" x="22" y="32">Search entities, aliases, identifiers…</text>
+		<circle class="artifact-line" cx="573" cy="27" r="7" />
+		<line class="artifact-line" x1="578" y1="32" x2="584" y2="38" />
+		<g class="artifact-lines" marker-end="url(#search-arrow)">
+			<line x1="130" y1="91" x2="154" y2="91" />
+			<line x1="278" y1="91" x2="302" y2="91" />
+			<line x1="426" y1="91" x2="450" y2="91" />
+		</g>
+		<g class="artifact-boxes">
+			<rect x="8" y="62" width="122" height="58" />
+			<rect x="156" y="62" width="122" height="58" />
+			<rect x="304" y="62" width="122" height="58" />
+			<rect x="452" y="62" width="122" height="58" />
+		</g>
+		<g class="artifact-labels">
+			<text x="69" y="86" text-anchor="middle"><tspan x="69">QUERY</tspan><tspan x="69" dy="14">UNDERSTANDING</tspan></text>
+			<text x="217" y="86" text-anchor="middle"><tspan x="217">CANDIDATE</tspan><tspan x="217" dy="14">RETRIEVAL</tspan></text>
+			<text x="365" y="86" text-anchor="middle"><tspan x="365">ENTITY</tspan><tspan x="365" dy="14">RESOLUTION</tspan></text>
+			<text x="513" y="95" text-anchor="middle">RANKING</text>
+		</g>
+		<g class="search-results">
+			<circle cx="17" cy="151" r="6" />
+			<rect x="35" y="144" width="315" height="12" />
+			<rect x="446" y="144" width="128" height="12" />
+			<circle cx="17" cy="178" r="6" />
+			<rect x="35" y="171" width="286" height="12" />
+			<rect x="336" y="171" width="72" height="12" />
+			<rect x="446" y="171" width="128" height="12" />
+			<circle cx="17" cy="205" r="6" />
+			<rect x="35" y="198" width="244" height="12" />
+			<rect x="446" y="198" width="128" height="12" />
+		</g>
+	</svg>
+)}
+
+{kind === "graph" && (
+	<svg class="technical-artifact" viewBox="0 0 640 220" role="img" aria-labelledby="graph-title graph-desc">
+		<title id="graph-title">Semantic system graph</title>
+		<desc id="graph-desc">A restrained system relationship graph with labeled entities and a metadata field.</desc>
+		<g class="artifact-lines">
+			<line x1="84" y1="36" x2="154" y2="92" />
+			<line x1="119" y1="128" x2="154" y2="92" />
+			<line x1="154" y1="92" x2="235" y2="142" />
+			<line x1="154" y1="92" x2="178" y2="48" />
+			<line x1="235" y1="142" x2="306" y2="188" />
+			<line x1="235" y1="142" x2="265" y2="74" />
+			<line x1="265" y1="74" x2="336" y2="114" />
+			<line x1="336" y1="114" x2="382" y2="52" />
+			<line x1="336" y1="114" x2="394" y2="168" />
+			<line x1="119" y1="128" x2="96" y2="181" />
+			<line x1="178" y1="48" x2="151" y2="18" />
+		</g>
+		<g class="graph-nodes">
+			<circle cx="84" cy="36" r="7" />
+			<circle cx="119" cy="128" r="7" />
+			<circle class="graph-node--primary" cx="154" cy="92" r="8" />
+			<circle cx="178" cy="48" r="7" />
+			<circle class="graph-node--primary" cx="235" cy="142" r="8" />
+			<circle cx="265" cy="74" r="7" />
+			<circle cx="306" cy="188" r="7" />
+			<circle cx="336" cy="114" r="7" />
+			<circle cx="382" cy="52" r="7" />
+			<circle cx="394" cy="168" r="7" />
+			<circle cx="96" cy="181" r="7" />
+			<circle cx="151" cy="18" r="7" />
+		</g>
+		<g class="graph-labels">
+			<rect x="49" y="51" width="54" height="9" />
+			<rect x="98" y="143" width="52" height="9" />
+			<rect x="164" y="101" width="66" height="9" />
+			<rect x="188" y="33" width="44" height="9" />
+			<rect x="246" y="151" width="52" height="9" />
+			<rect x="275" y="59" width="60" height="9" />
+			<rect x="345" y="125" width="46" height="9" />
+		</g>
+		<rect class="artifact-box" x="466" y="36" width="150" height="150" />
+		<g class="graph-metadata">
+			<rect x="482" y="55" width="85" height="10" />
+			<rect x="482" y="78" width="55" height="10" />
+			<rect x="482" y="101" width="115" height="10" />
+			<rect x="482" y="124" width="96" height="10" />
+			<rect x="482" y="147" width="117" height="10" />
+		</g>
+	</svg>
+)}

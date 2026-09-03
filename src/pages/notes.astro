@@ -1,0 +1,17 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+---
+
+<BaseLayout title="Notes — Daria Pavlova" description="Technical notes on data infrastructure, search and semantic systems.">
+	<Header current="notes" />
+	<main id="main-content" class="interior-page page-frame">
+		<header class="interior-intro">
+			<p class="eyebrow">Notes</p>
+			<h1>Technical observations,{" "}<br />decisions and experiments.</h1>
+			<p>No notes are published yet. This page will hold substantive technical writing rather than short updates.</p>
+		</header>
+	</main>
+	<Footer />
+</BaseLayout>

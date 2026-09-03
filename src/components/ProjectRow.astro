@@ -1,0 +1,31 @@
+---
+import type { Project } from "../data/projects";
+import TechnicalArtifact from "./TechnicalArtifact.astro";
+
+interface Props {
+	project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<article class="project-row" id={project.slug}>
+	<p class="project-number" aria-hidden="true">{project.number}</p>
+	<div class="project-copy">
+		<p class="mono-label">{project.category}</p>
+		<h3>{project.title}</h3>
+		<p class="project-description">{project.description}</p>
+		<div class="project-links">
+			<a href={`/work#${project.slug}`}>Case study</a>
+			<span aria-hidden="true">·</span>
+			{project.repositoryUrl ? (
+				<a href={project.repositoryUrl} target="_blank" rel="noreferrer">Repository</a>
+			) : (
+				<span class="pending-link">Repository —</span>
+			)}
+		</div>
+	</div>
+	<div class="project-artifact">
+		<TechnicalArtifact kind={project.artifact} />
+	</div>
+</article>
