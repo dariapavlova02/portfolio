@@ -5,8 +5,8 @@
 	--ink: #11110f;
 	--muted: #5f5f59;
 	--light-fill: #d8d6d0;
-	--rule: rgba(17, 17, 15, 0.56);
-	--soft-rule: rgba(17, 17, 15, 0.26);
+	--rule: rgba(17, 17, 15, 0.4);
+	--soft-rule: rgba(17, 17, 15, 0.18);
 	--serif: "Source Serif 4 Variable", Georgia, serif;
 	--sans: "Inter Variable", Arial, sans-serif;
 	--mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
@@ -71,7 +71,8 @@ a:focus-visible {
 }
 
 .page-frame {
-	margin-inline: var(--page-margin);
+	width: min(calc(100% - var(--page-margin) - var(--page-margin)), 100rem);
+	margin-inline: auto;
 }
 
 .site-header {
@@ -119,7 +120,6 @@ a:focus-visible {
 	content: "";
 	transform: scaleX(0);
 	transform-origin: right;
-	transition: transform 180ms ease;
 }
 
 .site-nav a:hover::after,
@@ -132,8 +132,8 @@ a:focus-visible {
 	display: grid;
 	grid-template-columns: repeat(12, minmax(0, 1fr));
 	column-gap: var(--grid-gap);
-	min-height: 515px;
-	padding-block: clamp(3.75rem, 6vw, 6rem) clamp(4rem, 6.5vw, 6.5rem);
+	min-height: 455px;
+	padding-block: clamp(3.75rem, 5vw, 4.75rem) clamp(2.15rem, 2.6vw, 2.6rem);
 }
 
 .intro-primary {
@@ -156,8 +156,8 @@ a:focus-visible {
 	max-width: 800px;
 	margin: 1.4rem 0 1.55rem;
 	font-family: var(--serif);
-	font-size: clamp(3.25rem, 4.1vw, 3.85rem);
-	font-weight: 400;
+	font-size: clamp(3.1rem, 3.85vw, 3.65rem);
+	font-weight: 380;
 	letter-spacing: -0.035em;
 	line-height: 0.93;
 }
@@ -179,7 +179,7 @@ a:focus-visible {
 
 .intro-secondary {
 	display: flex;
-	grid-column: 9 / 13;
+	grid-column: 8 / 13;
 	flex-direction: column;
 	align-self: stretch;
 	padding-top: 2.6rem;
@@ -215,19 +215,18 @@ a:focus-visible {
 	grid-template-columns: repeat(12, minmax(0, 1fr));
 	column-gap: var(--grid-gap);
 	min-height: 270px;
-	padding-bottom: clamp(2.6rem, 4.2vw, 4.2rem);
 }
 
 .featured-index {
 	grid-column: 1;
-	padding-top: 1.55rem;
+	padding-block: 1.55rem clamp(2.6rem, 4.2vw, 4.2rem);
 }
 
 .featured-summary {
 	display: flex;
 	grid-column: 2 / span 4;
 	flex-direction: column;
-	padding-top: 1.55rem;
+	padding-block: 1.55rem clamp(2.6rem, 4.2vw, 4.2rem);
 }
 
 .featured-summary h2,
@@ -240,6 +239,11 @@ a:focus-visible {
 	letter-spacing: -0.02em;
 	line-height: 1.05;
 	text-transform: uppercase;
+}
+
+.featured-summary h2 {
+	font-weight: 425;
+	text-transform: none;
 }
 
 .featured-category {
@@ -268,21 +272,20 @@ a:focus-visible {
 	font-size: 1.35rem;
 	font-weight: 400;
 	line-height: 0.8;
-	transition: transform 180ms ease;
 }
 
 .arrow-link:hover span:last-child {
-	transform: translateX(5px);
+	transform: none;
 }
 
 .featured-scale {
 	grid-column: 7 / 13;
 	border-left: 1px solid var(--soft-rule);
-	padding: 1.55rem 0 0 4.6rem;
+	padding: 1.55rem 0 clamp(2.6rem, 4.2vw, 4.2rem) 4.6rem;
 }
 
 .scale-value {
-	margin: 1rem 0 -0.35rem;
+	margin: 1rem 0 0;
 	font-family: var(--serif);
 	font-size: clamp(3.6rem, 5.7vw, 6rem);
 	font-variant-numeric: lining-nums;
@@ -292,15 +295,15 @@ a:focus-visible {
 }
 
 .scale-unit {
-	margin: 0;
+	margin: 0.4rem 0 0;
 	font-family: var(--serif);
-	font-size: clamp(1.75rem, 2.4vw, 2.5rem);
+	font-size: clamp(1.2rem, 1.55vw, 1.55rem);
 	line-height: 1;
 }
 
 .scale-context {
 	max-width: 33rem;
-	margin: 1.55rem 0 0;
+	margin: 1.35rem 0 0;
 	font-size: 0.95rem;
 	line-height: 1.5;
 }
@@ -830,13 +833,5 @@ a:focus-visible {
 
 	.project-links {
 		gap: 0.85rem;
-	}
-}
-
-@media (prefers-reduced-motion: reduce) {
-	*,
-	*::before,
-	*::after {
-		transition-duration: 0.01ms !important;
 	}
 }
