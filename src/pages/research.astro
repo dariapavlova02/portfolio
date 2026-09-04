@@ -1,0 +1,265 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+
+const pdfUrl = "https://aile3.ijs.si/dunja/SiKDD2025/Papers/IS2024_-_SIKDD_2025_paper_6.pdf";
+const doiUrl = "https://doi.org/10.70314/ix.2025.sikdd.6";
+const repoUrl = "https://github.com/daiapavlova02/defi_trends_semantic";
+
+const metrics = [
+	{ label: "AUC", baseline: "0.598", graph: "0.787", improvement: "+31.6%" },
+	{ label: "F1-score", baseline: "0.384", graph: "0.480", improvement: "+25.0%" },
+	{ label: "Precision", baseline: "0.341", graph: "0.490", improvement: "+43.7%" },
+	{ label: "Recall", baseline: "0.440", graph: "0.470", improvement: "+6.8%" },
+];
+
+const graphFeatures = [
+	{
+		name: "Multi-chain count",
+		description:
+			"Number of distinct blockchains a protocol is deployed on — a proxy for user base and attack surface.",
+	},
+	{
+		name: "Fork lineage",
+		description:
+			"Whether a protocol is forked from another, and how many forks derive from it — capturing inherited code and vulnerabilities.",
+	},
+	{
+		name: "Past incident count",
+		description:
+			"Total prior security incidents involving the protocol, signalling underlying weaknesses or target value.",
+	},
+];
+
+const references = [
+	{
+		text: "Chainalysis Team. 2023. “2022 Biggest Year Ever For Crypto Hacking with $3.8 Billion Stolen.” Chainalysis Blog.",
+		url: "https://www.chainalysis.com/blog/2022-biggest-year-ever-for-crypto-hacking/",
+	},
+	{
+		text: "G. Ke et al. 2017. “LightGBM: A Highly Efficient Gradient Boosting Decision Tree.” NeurIPS 30.",
+	},
+	{
+		text: "J. Michel and P. Parrend. 2023. “Graph-Based Intelligent Cyber Threat Detection System.” CRC Press.",
+	},
+	{
+		text: "D. Pavlova. 2025. “DeFi Security Trends: Semantic Knowledge Graph Analysis.” Code & dataset.",
+		url: "https://github.com/daiapavlova02/defi_trends_semantic",
+	},
+	{
+		text: "L. Sadlek et al. 2025. “Severity-Based Triage of Cybersecurity Incidents Using Kill Chain Attack Graphs.” JISA 89.",
+	},
+	{
+		text: "S. Werner et al. 2021. “SoK: Decentralized Finance (DeFi).” arXiv:2101.08778.",
+		url: "https://arxiv.org/abs/2101.08778",
+	},
+];
+---
+
+<BaseLayout
+	title="Research — Daria Pavlova"
+	description="Graph-based feature engineering for DeFi security incident severity prediction — published research by Daria Pavlova."
+>
+	<Header current="research" />
+	<main id="main-content" class="interior-page page-frame">
+		<header class="interior-intro interior-intro--wide research-intro">
+			<p class="eyebrow" data-reveal>Research · Publication</p>
+			<h1 data-reveal style="--reveal-delay: 80ms">
+				Graph-based feature engineering for DeFi security incident severity prediction
+			</h1>
+		</header>
+
+		<div class="research-meta" data-reveal style="--reveal-delay: 160ms">
+			<div class="research-meta--authors">
+				<p class="mono-label">Authors</p>
+				<p>
+					Daria Pavlova<br />
+					Inna Novalija<br />
+					Dunja Mladenić
+				</p>
+			</div>
+			<div class="research-meta--venue">
+				<p class="mono-label">Venue</p>
+				<p>
+					Information Society 2025, SiKDD<br />
+					6–10 October 2025<br />
+					Ljubljana, Slovenia
+				</p>
+			</div>
+			<div class="research-meta--links">
+				<p class="mono-label">Access</p>
+				<ul>
+					<li><a href={pdfUrl} target="_blank" rel="noreferrer">Paper (PDF) ↗</a></li>
+					<li><a href={repoUrl} target="_blank" rel="noreferrer">Code &amp; dataset ↗</a></li>
+					<li><a href={doiUrl} target="_blank" rel="noreferrer">DOI ↗</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<section class="research-section" aria-labelledby="abstract-title">
+			<p class="mono-label" id="abstract-title">Abstract</p>
+			<div class="research-section-body">
+				<p class="research-lede">
+					Which DeFi security incidents will escalate into severe financial losses? We integrate a
+					semantic knowledge graph of the DeFi ecosystem — protocol fork lineage, multi-chain
+					deployments and historical incidents — into a gradient boosting classifier. Graph-based
+					features lift predictive performance substantially over an incident-only baseline, with a
+					particularly large gain in precision and a significantly reduced false alarm rate.
+				</p>
+			</div>
+		</section>
+
+		<section class="research-stats" aria-label="Key results" data-animate>
+			<div class="research-stat">
+				<p class="mono-label">AUC</p>
+				<p class="research-stat-value research-stat-value--accent">0.787</p>
+				<p class="research-stat-note">vs. 0.598 baseline — a 31.6% relative improvement</p>
+			</div>
+			<div class="research-stat">
+				<p class="mono-label">Precision</p>
+				<p class="research-stat-value research-stat-value--accent">0.490</p>
+				<p class="research-stat-note">+43.7% over baseline — far fewer false alarms</p>
+			</div>
+			<div class="research-stat">
+				<p class="mono-label">Incidents</p>
+				<p class="research-stat-value research-stat-value--data" data-count="1608">1,608</p>
+				<p class="research-stat-note">DeFi security incidents, 2020–2025, publicly reported</p>
+			</div>
+			<div class="research-stat">
+				<p class="mono-label">Severe losses</p>
+				<p class="research-stat-value research-stat-value--data" data-count="402">402</p>
+				<p class="research-stat-note">incidents above the $2.21M severity threshold</p>
+			</div>
+		</section>
+
+		<section class="research-section" aria-labelledby="approach-title">
+			<p class="mono-label" id="approach-title">Approach</p>
+			<div class="research-section-body">
+				<p>
+					A semi-automated pipeline combines the Rekt database, the DeFiLlama API and SlowMist Hacked
+					into a Neo4j knowledge graph. Protocol, incident and blockchain nodes are connected by
+					<span class="feature-name">fork-of</span>, <span class="feature-name">deployed-on</span> and
+					<span class="feature-name">incident-involves</span> relations. From this graph we derive
+					structural features for each incident, computed strictly before the incident occurs:
+				</p>
+				<ul class="feature-list">
+					{graphFeatures.map((feature) => (
+						<li>
+							<span class="feature-name">{feature.name}</span>
+							<span>{feature.description}</span>
+						</li>
+					))}
+				</ul>
+				<p style="margin-top: 1.4rem;">
+					These graph features are combined with temporal and categorical incident features in a
+					LightGBM classifier. A severe incident is one exceeding the 75th percentile of losses —
+					$2.21M — yielding 402 severe cases out of 1,608.
+				</p>
+			</div>
+		</section>
+
+		<section class="research-section" aria-labelledby="results-title">
+			<p class="mono-label" id="results-title">Results</p>
+			<div class="research-section-body">
+				<div class="research-table-wrap">
+					<table class="research-table">
+						<thead>
+							<tr>
+								<th scope="col">Metric</th>
+								<th scope="col">Baseline</th>
+								<th scope="col">Semantic graph</th>
+								<th scope="col">Improvement</th>
+							</tr>
+						</thead>
+						<tbody>
+							{metrics.map((metric) => (
+								<tr>
+									<td class="metric-name">{metric.label}</td>
+									<td>{metric.baseline}</td>
+									<td>{metric.graph}</td>
+									<td class="improvement">{metric.improvement}</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+				<ul class="result-bars" aria-label="Baseline versus semantic graph model" data-animate>
+					{metrics.map((metric, index) => (
+						<li>
+							<span class="metric-name">{metric.label}</span>
+							<span class="bar-pair">
+								<span class="bar bar--baseline">
+									<span class="bar-track"><span class="bar-fill" style={`--w: ${Number(metric.baseline) * 100}%; --i-delay: ${index * 90}ms`}></span></span>
+									<span class="bar-value">{metric.baseline}</span>
+								</span>
+								<span class="bar bar--graph">
+									<span class="bar-track"><span class="bar-fill" style={`--w: ${Number(metric.graph) * 100}%; --i-delay: ${index * 90 + 150}ms`}></span></span>
+									<span class="bar-value">{metric.graph}</span>
+								</span>
+							</span>
+						</li>
+					))}
+				</ul>
+				<p class="bar-legend" aria-hidden="true"><span>Baseline</span><span>Semantic graph</span></p>
+				<p style="margin-top: 1.4rem;">
+					Cross-validation confirms stability: the graph-augmented model averages AUC 0.809
+					(std 0.027) across 5 folds, against 0.629 (std 0.036) for the baseline — a stronger and
+					more consistent signal.
+				</p>
+			</div>
+			<aside class="research-section-aside">
+				<p class="mono-label" style="color: var(--muted);">Reading</p>
+				<p style="font-size: 0.9rem; line-height: 1.55; margin: 0.55rem 0 0;">
+					Graph features are only weakly correlated with each other — they contribute complementary
+					signals rather than duplicating information.
+				</p>
+			</aside>
+		</section>
+
+		<section class="research-section" aria-labelledby="discussion-title">
+			<p class="mono-label" id="discussion-title">Discussion</p>
+			<div class="research-section-body">
+				<p>
+					Where an incident occurs in the ecosystem is as important as what it is. Incidents
+					affecting widely forked or multi-chain protocols are more likely to cause severe losses,
+					reflecting practical amplification effects through ecosystem dependencies.
+				</p>
+				<p>
+					Graph-based risk factors can support auditors and insurers in identifying critical hot
+					spots and pricing coverage more accurately than historical losses alone. Limitations
+					remain: the dataset covers only publicly reported incidents, features are static and
+					hand-engineered, and absolute performance leaves room before real-world deployment.
+					Future work points toward dynamic graphs and graph neural networks.
+				</p>
+			</div>
+		</section>
+
+		<section class="research-section research-references" aria-labelledby="references-title">
+			<p class="mono-label" id="references-title">References</p>
+			<div class="research-section-body">
+				<ol>
+					{references.map((reference) => (
+						<li>
+							{reference.url ? (
+								<a href={reference.url} target="_blank" rel="noreferrer">{reference.text}</a>
+							) : (
+								reference.text
+							)}
+						</li>
+					))}
+				</ol>
+			</div>
+		</section>
+
+		<section class="research-links" aria-label="Paper links">
+			<a class="arrow-link" href={pdfUrl} target="_blank" rel="noreferrer">
+				<span>Read the paper</span><span aria-hidden="true">→</span>
+			</a>
+			<a class="arrow-link" href={repoUrl} target="_blank" rel="noreferrer">
+				<span>Code &amp; dataset</span><span aria-hidden="true">→</span>
+			</a>
+		</section>
+	</main>
+	<Footer />
+</BaseLayout>

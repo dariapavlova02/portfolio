@@ -6,6 +6,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
+const scale = project.facts.find((fact) => fact.count !== undefined) ?? project.facts[0];
 ---
 
 <section class="featured-evidence page-frame" aria-labelledby="featured-title">
@@ -13,18 +14,22 @@ const { project } = Astro.props;
 	<div class="featured-summary">
 		<p class="mono-label">Featured project</p>
 		<h2 id="featured-title">{project.title}</h2>
-		<p class="featured-category">Large-scale data infrastructure</p>
-		<a class="arrow-link" href={`#${project.slug}`}>
-			<span>View case study</span><span aria-hidden="true">→</span>
+		<p class="featured-category">{project.category}</p>
+		<a class="arrow-link" href={`/work/${project.slug}`}>
+			<span>Read the case study</span><span aria-hidden="true">→</span>
 		</a>
 	</div>
-	<div class="featured-scale">
+	<div class="featured-scale" data-animate>
 		<p class="mono-label">Scale</p>
-		<p class="scale-value">≈500,000,000</p>
-		<p class="scale-unit">records</p>
-		<p class="scale-context">
-			Multi-year regulatory dataset exported under memory and compute constraints
-			with strict validation requirements.
+		<p
+			class="scale-value"
+			data-count={scale.count}
+			data-prefix={scale.prefix}
+			data-suffix={scale.suffix}
+		>
+			{scale.value}
 		</p>
+		<p class="scale-unit">{scale.label.toLowerCase()}</p>
+		<p class="scale-context">{project.statement}</p>
 	</div>
 </section>

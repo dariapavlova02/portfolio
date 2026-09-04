@@ -36,5 +36,51 @@ const {
 	<body>
 		<a class="skip-link" href="#main-content">Skip to content</a>
 		<slot />
+		<script is:inline>
+			document.documentElement.classList.add("js");
+			const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+			const targets = document.querySelectorAll("[data-reveal], [data-animate]");
+
+			// Count-up: <span data-count="1608" data-prefix="≈" data-suffix="+">1,608</span>
+			function countUp(el) {
+				const end = Number(el.dataset.count);
+				if (!Number.isFinite(end) || reduceMotion) return;
+				const prefix = el.dataset.prefix || "";
+				const suffix = el.dataset.suffix || "";
+				const format = (n) => prefix + Math.round(n).toLocaleString("en-US") + suffix;
+				const duration = 1400;
+				const start = performance.now();
+				const tick = (now) => {
+					const t = Math.min(1, (now - start) / duration);
+					const eased = 1 - Math.pow(1 - t, 4);
+					el.textContent = format(end * eased);
+					if (t < 1) requestAnimationFrame(tick);
+				};
+				requestAnimationFrame(tick);
+			}
+
+			function activate(el) {
+				el.classList.add("is-visible");
+				el.querySelectorAll("[data-count]").forEach(countUp);
+				if (el.hasAttribute("data-count")) countUp(el);
+			}
+
+			if (!("IntersectionObserver" in window) || reduceMotion) {
+				targets.forEach((el) => el.classList.add("is-visible"));
+			} else {
+				const observer = new IntersectionObserver(
+					(entries) => {
+						entries.forEach((entry) => {
+							if (entry.isIntersecting) {
+								activate(entry.target);
+								observer.unobserve(entry.target);
+							}
+						});
+					},
+					{ rootMargin: "0px 0px -10% 0px", threshold: 0.1 },
+				);
+				targets.forEach((el) => observer.observe(el));
+			}
+		</script>
 	</body>
 </html>

@@ -2,13 +2,14 @@
 import { siteConfig } from "../config";
 
 interface Props {
-	current?: "home" | "work" | "notes" | "about";
+	current?: "home" | "work" | "research" | "notes" | "about";
 }
 
 const { current = "home" } = Astro.props;
 
 const navigation = [
 	{ label: "Work", href: current === "home" ? "#work" : "/work", key: "work" },
+	{ label: "Research", href: "/research", key: "research" },
 	{ label: "Notes", href: "/notes", key: "notes" },
 	{ label: "About", href: "/about", key: "about" },
 	{ label: "GitHub", href: siteConfig.githubUrl, external: true },
