@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 :root {
-	--paper: #faf3e1;
-	--cream: #f5e7c6;
-	--ink: #222222;
-	--accent: #fa8112;
-	--muted: #626058;
+	--paper: #fff5f5;
+	--cream: #f7d6d0;
+	--ink: #4a4a4a;
+	--accent: #e2b4bd;
+	--muted: color-mix(in srgb, var(--ink) 78%, var(--paper));
 	--light-fill: color-mix(in srgb, var(--ink) 18%, var(--cream));
-	--rule: rgba(34, 34, 34, 0.4);
-	--soft-rule: rgba(34, 34, 34, 0.18);
+	--rule: rgb(74 74 74 / 40%);
+	--soft-rule: rgb(74 74 74 / 18%);
 	--serif: "Source Serif 4 Variable", Georgia, serif;
 	--sans: "Inter Variable", Arial, sans-serif;
 	--mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
