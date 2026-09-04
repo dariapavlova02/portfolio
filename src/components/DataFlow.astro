@@ -1,0 +1,65 @@
+---
+/**
+ * Hero illustration: a pipeline DAG. Two sources feed an ingest task, which
+ * fans out to validate and transform, both loading into a warehouse.
+ * Tasks light up in run order on a loop, edges carry data while active.
+ * `--step` sets the position in the run sequence.
+ */
+const tasks = [
+	{ id: "ingest", x: 130, y: 93, label: "ingest", step: 1 },
+	{ id: "validate", x: 258, y: 44, label: "validate", step: 2 },
+	{ id: "transform", x: 258, y: 142, label: "transform", step: 2 },
+];
+const edges = [
+	{ d: "M74 62 C 98 62, 106 110, 130 110", step: 1 },
+	{ d: "M74 158 C 98 158, 106 110, 130 110", step: 1 },
+	{ d: "M230 110 C 242 110, 246 61, 258 61", step: 2 },
+	{ d: "M230 110 C 242 110, 246 159, 258 159", step: 2 },
+	{ d: "M358 61 C 378 61, 384 110, 404 110", step: 3 },
+	{ d: "M358 159 C 378 159, 384 110, 404 110", step: 3 },
+];
+---
+
+<svg class="dag" viewBox="20 24 460 190" role="img" aria-labelledby="dag-title dag-desc">
+	<title id="dag-title">Pipeline DAG illustration</title>
+	<desc id="dag-desc">Two data sources feed an ingest task, which fans out to validation and transformation tasks that load into a warehouse. Tasks light up in run order.</desc>
+
+	<g class="dag-edges">
+		{edges.map((edge) => <path d={edge.d} />)}
+	</g>
+	<g class="dag-edges dag-edges--active">
+		{edges.map((edge) => <path d={edge.d} style={`--step: ${edge.step}`} />)}
+	</g>
+
+	<!-- Sources: database cylinders -->
+	<g class="dag-node dag-node--db" style="--step: 0">
+		<path d="M30 48 v28 a22 8 0 0 0 44 0 v-28" />
+		<ellipse cx="52" cy="48" rx="22" ry="8" />
+	</g>
+	<g class="dag-node dag-node--db" style="--step: 0">
+		<path d="M30 144 v28 a22 8 0 0 0 44 0 v-28" />
+		<ellipse cx="52" cy="144" rx="22" ry="8" />
+	</g>
+
+	<!-- Tasks -->
+	{tasks.map((task) => (
+		<g class="dag-node dag-node--task" style={`--step: ${task.step}`}>
+			<rect x={task.x} y={task.y} width="100" height="34" rx="3" />
+			<circle class="dag-status" cx={task.x + 14} cy={task.y + 17} r="3.5" />
+			<text x={task.x + 25} y={task.y + 21}>{task.label}</text>
+		</g>
+	))}
+
+	<!-- Warehouse -->
+	<g class="dag-node dag-node--db dag-node--warehouse" style="--step: 3">
+		<path d="M404 84 v52 a30 10 0 0 0 60 0 v-52" />
+		<ellipse cx="434" cy="84" rx="30" ry="10" />
+		<path class="dag-ring" d="M404 101 a30 10 0 0 0 60 0" />
+		<path class="dag-ring" d="M404 118 a30 10 0 0 0 60 0" />
+	</g>
+
+	<g class="dag-labels">
+		<text x="52" y="204" text-anchor="middle">sources</text>
+		<text x="434" y="204" text-anchor="middle">warehouse</text>
+	</g>
+</svg>

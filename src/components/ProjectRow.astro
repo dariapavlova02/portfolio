@@ -21,7 +21,7 @@ const artifactLabels = {
 		<h3 id={`${project.slug}-title`}>{project.title}</h3>
 		<p class="project-description">{project.description}</p>
 		<div class="project-links">
-			<a href={`/work#${project.slug}`}>Case study</a>
+			<a href={`/work/${project.slug}`}>Case study</a>
 			<span aria-hidden="true">·</span>
 			{project.repositoryUrl ? (
 				<a href={project.repositoryUrl} target="_blank" rel="noreferrer">Repository</a>
@@ -30,7 +30,7 @@ const artifactLabels = {
 			)}
 		</div>
 	</div>
-	<figure class="project-artifact">
+	<figure class="project-artifact" data-animate>
 		<div class="artifact-canvas" tabindex="0" role="region" aria-label={`${artifactLabels[project.artifact]} diagram`}>
 			<TechnicalArtifact kind={project.artifact} />
 		</div>

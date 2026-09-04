@@ -8,8 +8,8 @@ import Header from "../components/Header.astro";
 	<Header current="about" />
 	<main id="main-content" class="interior-page page-frame">
 		<header class="interior-intro interior-intro--wide">
-			<p class="eyebrow">About</p>
-			<h1>I work on systems where data scale, retrieval quality and correctness become engineering constraints.</h1>
+			<p class="eyebrow" data-reveal>About</p>
+			<h1 data-reveal style="--reveal-delay: 80ms">I work on systems where data scale, retrieval quality and correctness become engineering constraints.</h1>
 		</header>
 
 		<section class="records-section" aria-labelledby="experience-title">
@@ -22,7 +22,7 @@ import Header from "../components/Header.astro";
 				</div>
 				<div class="record-detail">
 					<p>Large-scale transaction and regulatory data infrastructure.</p>
-					<a href="/work#nbu-registry-export">Selected work → NBU Registry Export</a>
+					<a href="/work/nbu-registry-export">Selected work → NBU Registry Export</a>
 				</div>
 			</article>
 		</section>
@@ -36,7 +36,8 @@ import Header from "../components/Header.astro";
 					<h3>Information and Communication Technologies</h3>
 				</div>
 				<div class="record-detail">
-					<p>Research context and dates will be added with the final professional record.</p>
+					<p>Research on knowledge-graph features for DeFi security incident severity prediction, published at Information Society 2025.</p>
+					<a href="/research">Research → Graph-based feature engineering</a>
 				</div>
 			</article>
 		</section>

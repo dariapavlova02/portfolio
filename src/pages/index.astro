@@ -4,8 +4,38 @@ import EditorialIntro from "../components/EditorialIntro.astro";
 import FeaturedEvidence from "../components/FeaturedEvidence.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
-import ProjectRow from "../components/ProjectRow.astro";
 import { projects } from "../data/projects";
+
+const sections = [
+	{
+		href: "/work",
+		label: "Work",
+		title: "Case studies",
+		copy: "Data infrastructure, search and semantic systems, each written up as problem, approach and outcome.",
+		figure: String(projects.length),
+		figureNote: "projects",
+	},
+	{
+		href: "/research",
+		label: "Research",
+		title: "Published research",
+		copy: "Graph-based feature engineering for DeFi security incident severity prediction, Information Society 2025.",
+		figure: "0.787",
+		figureNote: "AUC, up from 0.598",
+	},
+	{
+		href: "/notes",
+		label: "Notes",
+		title: "Technical notes",
+		copy: "Longer-form writing on engineering decisions and experiments. First notes are in preparation.",
+	},
+	{
+		href: "/about",
+		label: "About",
+		title: "Background",
+		copy: "Experience, education, CV and how to get in touch.",
+	},
+];
 ---
 
 <BaseLayout>
@@ -14,25 +44,47 @@ import { projects } from "../data/projects";
 		<EditorialIntro />
 		<FeaturedEvidence project={projects[0]} />
 
-		<section class="selected-work page-frame" id="work" aria-labelledby="work-title">
+		<section class="selected-work selected-work--compact page-frame" id="work" aria-labelledby="work-title">
 			<header class="section-header">
 				<h2 class="mono-label" id="work-title">Selected work</h2>
 				<a class="arrow-link arrow-link--compact" href="/work">
-					<span>View all work</span><span aria-hidden="true">→</span>
+					<span>All work</span><span aria-hidden="true">→</span>
 				</a>
 			</header>
-
-			<div class="project-list">
-				{projects.map((project) => <ProjectRow project={project} />)}
-			</div>
+			<ul class="work-index">
+				{projects.map((project) => (
+					<li>
+						<a href={`/work/${project.slug}`}>
+							<span class="project-number" aria-hidden="true">{project.number}</span>
+							<span class="work-index-title">{project.title}</span>
+							<span class="work-index-statement">{project.statement}</span>
+							<span class="index-arrow" aria-hidden="true">→</span>
+						</a>
+					</li>
+				))}
+			</ul>
 		</section>
 
-		<section class="more-work page-frame" aria-label="More work">
-			<span class="more-work-mark" aria-hidden="true">↗</span>
-			<p>More case studies, technical notes<br />and experiments.</p>
-			<a class="arrow-link arrow-link--compact" href="/work">
-				<span>View all work</span><span aria-hidden="true">→</span>
-			</a>
+		<section class="page-frame" aria-labelledby="index-title">
+			<header class="section-header">
+				<h2 class="mono-label" id="index-title">Contents</h2>
+			</header>
+			<nav class="site-index" aria-label="Site sections">
+				{sections.map((section) => (
+					<a href={section.href}>
+						<span class="mono-label">{section.label}</span>
+						<h3>{section.title}</h3>
+						<p>{section.copy}</p>
+						{section.figure && (
+							<span class="index-figure">
+								{section.figure}
+								<small>{section.figureNote}</small>
+							</span>
+						)}
+						<span class="index-arrow" aria-hidden="true">→</span>
+					</a>
+				))}
+			</nav>
 		</section>
 	</main>
 	<Footer />

@@ -1,5 +1,9 @@
+---
+import DataFlow from "./DataFlow.astro";
+---
+
 <section class="editorial-intro page-frame" aria-labelledby="intro-title">
-	<div class="intro-primary">
+	<div class="intro-primary" data-reveal>
 		<p class="eyebrow">Data Engineer</p>
 		<h1 id="intro-title">
 			<span>I build data-intensive</span>
@@ -13,7 +17,7 @@
 		</p>
 	</div>
 
-	<div class="intro-secondary">
+	<div class="intro-secondary" data-reveal style="--reveal-delay: 120ms">
 		<p>
 			<span>I design and build infrastructure,</span>{" "}
 			<span>retrieval and AI systems.</span>
@@ -23,6 +27,9 @@
 			<span>observable performance and</span>{" "}
 			<span>systems that last.</span>
 		</p>
+		<div class="intro-figure">
+			<DataFlow />
+		</div>
 		<div class="location-line" aria-label="Ljubljana, Slovenia, 2026">
 			<span>Ljubljana, SI</span>
 			<span class="location-rule" aria-hidden="true"></span>

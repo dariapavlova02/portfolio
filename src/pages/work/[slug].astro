@@ -1,0 +1,107 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import TechnicalArtifact from "../../components/TechnicalArtifact.astro";
+import { projects } from "../../data/projects";
+
+export function getStaticPaths() {
+	return projects.map((project, index) => ({
+		params: { slug: project.slug },
+		props: {
+			project,
+			previous: projects[(index - 1 + projects.length) % projects.length],
+			next: projects[(index + 1) % projects.length],
+		},
+	}));
+}
+
+const { project, previous, next } = Astro.props;
+const artifactLabels = {
+	pipeline: "Export pipeline",
+	search: "Retrieval flow",
+	graph: "Semantic relationships",
+};
+---
+
+<BaseLayout title={`${project.title} — Daria Pavlova`} description={project.description}>
+	<Header current="work" />
+	<main id="main-content" class="interior-page page-frame">
+		<header class="interior-intro case-intro">
+			<p class="eyebrow" data-reveal>{project.category}</p>
+			<h1 data-reveal style="--reveal-delay: 80ms">{project.title}</h1>
+			<p data-reveal style="--reveal-delay: 160ms">{project.statement}</p>
+		</header>
+
+		<section class="case-facts" aria-label="Key facts" data-animate>
+			{project.facts.map((fact) => (
+				<div class="case-fact">
+					<p class="mono-label">{fact.label}</p>
+					<p
+						class="case-fact-value"
+						data-count={fact.count}
+						data-prefix={fact.prefix}
+						data-suffix={fact.suffix}
+					>
+						{fact.value}
+					</p>
+				</div>
+			))}
+		</section>
+
+		<section class="case-artifact" aria-label="Diagram">
+			<figure class="project-artifact" data-animate>
+				<div class="artifact-canvas" tabindex="0" role="region" aria-label={`${artifactLabels[project.artifact]} diagram`}>
+					<TechnicalArtifact kind={project.artifact} />
+				</div>
+				<figcaption>{artifactLabels[project.artifact]} <span>— provisional schematic</span></figcaption>
+			</figure>
+		</section>
+
+		<section class="research-section" aria-labelledby="problem-title">
+			<p class="mono-label" id="problem-title">Problem</p>
+			<div class="research-section-body">
+				<p class="research-lede">{project.problem}</p>
+			</div>
+		</section>
+
+		<section class="research-section" aria-labelledby="approach-title">
+			<p class="mono-label" id="approach-title">Approach</p>
+			<div class="research-section-body">
+				<ol class="approach-list">
+					{project.approach.map((step) => <li>{step}</li>)}
+				</ol>
+			</div>
+			<aside class="research-section-aside">
+				<p class="mono-label" style="color: var(--muted);">Stack</p>
+				<ul class="stack-list" style="margin-top: 0.7rem;">
+					{project.stack.map((item) => <li>{item}</li>)}
+				</ul>
+			</aside>
+		</section>
+
+		<section class="research-section" aria-labelledby="outcome-title">
+			<p class="mono-label" id="outcome-title">Outcome</p>
+			<div class="research-section-body">
+				<p>{project.outcome}</p>
+				{project.repositoryUrl ? (
+					<p><a class="arrow-link" href={project.repositoryUrl} target="_blank" rel="noreferrer" style="margin-top: 1.4rem;"><span>Repository</span><span aria-hidden="true">→</span></a></p>
+				) : (
+					<p class="pending-link mono-label" style="margin-top: 1.4rem; display: inline-block;">Repository pending</p>
+				)}
+			</div>
+		</section>
+
+		<nav class="case-nav" aria-label="Other case studies">
+			<a href={`/work/${previous.slug}`}>
+				<span class="mono-label">Previous</span>
+				<span class="case-nav-title">{previous.title}</span>
+			</a>
+			<a href={`/work/${next.slug}`}>
+				<span class="mono-label">Next</span>
+				<span class="case-nav-title">{next.title}</span>
+			</a>
+		</nav>
+	</main>
+	<Footer />
+</BaseLayout>

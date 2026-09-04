@@ -8,9 +8,9 @@ import Header from "../components/Header.astro";
 	<Header current="notes" />
 	<main id="main-content" class="interior-page page-frame">
 		<header class="interior-intro">
-			<p class="eyebrow">Notes</p>
-			<h1>Technical observations,{" "}<br />decisions and experiments.</h1>
-			<p>No notes are published yet. This page will hold substantive technical writing rather than short updates.</p>
+			<p class="eyebrow" data-reveal>Notes</p>
+			<h1 data-reveal style="--reveal-delay: 80ms">Technical observations,{" "}<br />decisions and experiments.</h1>
+			<p data-reveal style="--reveal-delay: 160ms">No notes are published yet. This page will hold substantive technical writing rather than short updates. In the meantime, see <a href="/research" style="border-bottom: 1px solid var(--rule);">Research</a> for the latest publication.</p>
 		</header>
 	</main>
 	<Footer />

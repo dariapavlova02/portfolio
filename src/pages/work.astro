@@ -10,9 +10,9 @@ import { projects } from "../data/projects";
 	<Header current="work" />
 	<main id="main-content" class="interior-page page-frame">
 		<header class="interior-intro">
-			<p class="eyebrow">Work</p>
-			<h1>Systems, evidence{" "}<br />and engineering decisions.</h1>
-			<p>Project content is provisional while the final case studies and repositories are assembled.</p>
+			<p class="eyebrow" data-reveal>Work</p>
+			<h1 data-reveal style="--reveal-delay: 80ms">Systems, evidence{" "}<br />and engineering decisions.</h1>
+			<p data-reveal style="--reveal-delay: 160ms">Each project has a case study covering the problem, the approach and the outcome. Repositories are added as they are made public.</p>
 		</header>
 		<section class="project-list" aria-label="Projects">
 			{projects.map((project) => <ProjectRow project={project} />)}
