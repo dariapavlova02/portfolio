@@ -9,7 +9,7 @@ interface Props {
 const { project } = Astro.props;
 ---
 
-<article class="project-row" id={project.slug} data-motion>
+<article class="project-row" id={project.slug} data-motion data-trace-rule>
 	<p class="project-number" aria-hidden="true">{project.number}</p>
 	<div class="project-copy">
 		<p class="mono-label">{project.category}</p>

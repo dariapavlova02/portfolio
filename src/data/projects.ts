@@ -133,7 +133,7 @@ export const projects: Project[] = [
 			"Graph enrichment did not improve the corrected chronological holdout. Temporal cross-validation was slightly higher on average, but the result was not consistent enough to support a strong predictive claim.",
 		system: "Python / LightGBM / Neo4j / chronological validation / reproducible artifacts",
 		repositoryUrl: "https://github.com/dariapavlova02/defi-security-knowledge-graph",
-		researchUrl: "/research",
+		researchUrl: "/research/graph-based-defi-security",
 	},
 ];
 

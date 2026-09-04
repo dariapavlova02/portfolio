@@ -1,32 +1,49 @@
 @media (prefers-reduced-motion: no-preference) {
+	.site-header {
+		transition: border-color 220ms ease;
+	}
+
 	.site-nav a::after {
 		transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
 	}
 
 	.arrow-link span:last-child,
-	.index-link span:last-child {
+	.index-link span:last-child,
+	.publication-entry-action span,
+	.research-context a span {
 		transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
 	}
 
 	.arrow-link:hover span:last-child,
 	.arrow-link:focus-visible span:last-child,
 	.index-link:hover span:last-child,
-	.index-link:focus-visible span:last-child {
-		transform: translateX(3px);
+	.index-link:focus-visible span:last-child,
+	.publication-entry:hover .publication-entry-action span,
+	.publication-entry:focus-visible .publication-entry-action span,
+	.research-context a:last-child:hover span,
+	.research-context a:last-child:focus-visible span {
+		transform: translateX(4px);
 	}
 
 	.index-link:not(.index-link--next):hover span:last-child,
-	.index-link:not(.index-link--next):focus-visible span:last-child {
-		transform: translateX(-3px);
+	.index-link:not(.index-link--next):focus-visible span:last-child,
+	.research-context a:first-child:hover span,
+	.research-context a:first-child:focus-visible span {
+		transform: translateX(-4px);
 	}
 
-	.project-artifact .technical-artifact {
-		transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+	.technical-artifact .artifact-lines,
+	.technical-artifact .artifact-line,
+	.technical-artifact .artifact-box,
+	.technical-artifact .artifact-boxes rect,
+	.technical-artifact .graph-nodes circle {
+		transition:
+			stroke 220ms ease,
+			fill 220ms ease;
 	}
 
-	.project-row:hover .technical-artifact,
-	.project-row:focus-within .technical-artifact {
-		transform: translateX(2px);
+	.research-figure:hover .artifact-lines:not(.artifact-lines--secondary) {
+		stroke: var(--accent);
 	}
 
 	html.motion-capable [data-motion] {
@@ -42,6 +59,141 @@
 			transform 460ms cubic-bezier(0.22, 1, 0.36, 1);
 	}
 
+	html.motion-capable [data-trace-rule] {
+		position: relative;
+	}
+
+	html.motion-capable [data-trace-rule]::after {
+		position: absolute;
+		top: -1px;
+		right: 0;
+		left: 0;
+		z-index: 2;
+		height: 1px;
+		background: var(--accent);
+		content: "";
+		opacity: 0;
+		pointer-events: none;
+		transform: scaleX(0);
+		transform-origin: left;
+	}
+
+	html.motion-capable [data-trace-rule].is-in-view::after {
+		animation: trace-rule 720ms cubic-bezier(0.22, 1, 0.36, 1) both;
+	}
+
+	html.motion-capable [data-motion] .technical-artifact .artifact-lines line,
+	html.motion-capable [data-motion] .technical-artifact .artifact-lines path,
+	html.motion-capable [data-motion] .technical-artifact .artifact-line,
+	html.motion-capable [data-motion] .technical-artifact .artifact-box,
+	html.motion-capable [data-motion] .technical-artifact .artifact-boxes rect {
+		stroke-dasharray: 900;
+		stroke-dashoffset: 900;
+	}
+
+	html.motion-capable [data-motion].is-in-view .technical-artifact .artifact-lines line,
+	html.motion-capable [data-motion].is-in-view .technical-artifact .artifact-lines path,
+	html.motion-capable [data-motion].is-in-view .technical-artifact .artifact-line,
+	html.motion-capable [data-motion].is-in-view .technical-artifact .artifact-box,
+	html.motion-capable [data-motion].is-in-view .technical-artifact .artifact-boxes rect {
+		animation: technical-draw 920ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+	}
+
+	html.motion-capable [data-motion].is-in-view .technical-artifact .artifact-lines:not(.artifact-lines--secondary) {
+		animation: trace-color 1.15s ease 120ms;
+	}
+
+	html.motion-capable [data-motion].is-in-view .technical-artifact .artifact-lines--secondary line,
+	html.motion-capable [data-motion].is-in-view .technical-artifact .artifact-lines--secondary path {
+		animation: secondary-line-reveal 480ms ease 420ms forwards;
+	}
+
+	html.motion-capable [data-motion] .technical-artifact .artifact-lines--secondary line,
+	html.motion-capable [data-motion] .technical-artifact .artifact-lines--secondary path {
+		stroke-dasharray: 4 5;
+		stroke-dashoffset: 0;
+		opacity: 0;
+	}
+
+	html.motion-capable [data-motion] .technical-artifact .artifact-labels,
+	html.motion-capable [data-motion] .technical-artifact .artifact-placeholder,
+	html.motion-capable [data-motion] .technical-artifact .artifact-arrowhead,
+	html.motion-capable [data-motion] .technical-artifact .research-flow-notes,
+	html.motion-capable [data-motion] .technical-artifact .graph-labels,
+	html.motion-capable [data-motion] .technical-artifact .graph-metadata {
+		opacity: 0;
+	}
+
+	html.motion-capable [data-motion].is-in-view .technical-artifact .artifact-labels,
+	html.motion-capable [data-motion].is-in-view .technical-artifact .artifact-placeholder,
+	html.motion-capable [data-motion].is-in-view .technical-artifact .artifact-arrowhead,
+	html.motion-capable [data-motion].is-in-view .technical-artifact .research-flow-notes,
+	html.motion-capable [data-motion].is-in-view .technical-artifact .graph-labels,
+	html.motion-capable [data-motion].is-in-view .technical-artifact .graph-metadata {
+		opacity: 1;
+		transition: opacity 380ms ease 380ms;
+	}
+
+	html.motion-capable [data-motion] .technical-artifact .graph-nodes circle,
+	html.motion-capable [data-motion] .technical-artifact .search-results circle {
+		opacity: 0;
+		transform: scale(0.65);
+		transform-box: fill-box;
+		transform-origin: center;
+	}
+
+	html.motion-capable [data-motion].is-in-view .technical-artifact .graph-nodes circle,
+	html.motion-capable [data-motion].is-in-view .technical-artifact .search-results circle {
+		animation: technical-node 420ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+		animation-delay: 360ms;
+	}
+
+	html.motion-capable [data-motion].is-in-view .technical-artifact .graph-nodes circle:nth-child(2n) {
+		animation-delay: 440ms;
+	}
+
+	html.motion-capable [data-motion].is-in-view .technical-artifact .graph-nodes circle:nth-child(3n) {
+		animation-delay: 520ms;
+	}
+
+	html.motion-capable [data-motion] .technical-artifact .search-results rect {
+		transform: scaleX(0);
+		transform-box: fill-box;
+		transform-origin: left;
+	}
+
+	html.motion-capable [data-motion].is-in-view .technical-artifact .search-results rect {
+		animation: result-expand 620ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+		animation-delay: 420ms;
+	}
+
+	html.motion-capable [data-motion] .plot-fill,
+	html.motion-capable [data-motion] .plot-range {
+		transform: scaleX(0);
+	}
+
+	html.motion-capable [data-motion] .plot-range {
+		transform-origin: center;
+	}
+
+	html.motion-capable [data-motion].is-in-view .plot-fill,
+	html.motion-capable [data-motion].is-in-view .plot-range {
+		animation: plot-expand 900ms cubic-bezier(0.22, 1, 0.36, 1) 180ms forwards;
+	}
+
+	html.motion-capable [data-motion] .plot-dot {
+		opacity: 0;
+		transform: translate(-50%, calc(-50% + 7px));
+	}
+
+	html.motion-capable [data-motion].is-in-view .plot-dot {
+		opacity: 1;
+		transform: translate(-50%, -50%);
+		transition:
+			opacity 320ms ease 720ms,
+			transform 420ms cubic-bezier(0.22, 1, 0.36, 1) 680ms;
+	}
+
 	.evidence-table tbody tr,
 	.evidence-list li,
 	.research-meta a {
@@ -49,6 +201,66 @@
 			background-color 180ms ease,
 			color 180ms ease,
 			border-color 180ms ease;
+	}
+
+	@keyframes trace-rule {
+		0% {
+			opacity: 0;
+			transform: scaleX(0);
+		}
+		15% {
+			opacity: 0.8;
+		}
+		75% {
+			opacity: 0.8;
+			transform: scaleX(1);
+		}
+		100% {
+			opacity: 0;
+			transform: scaleX(1);
+		}
+	}
+
+	@keyframes technical-draw {
+		to {
+			stroke-dashoffset: 0;
+		}
+	}
+
+	@keyframes trace-color {
+		0%,
+		100% {
+			stroke: var(--rule);
+		}
+		35%,
+		68% {
+			stroke: var(--accent);
+		}
+	}
+
+	@keyframes technical-node {
+		to {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
+
+	@keyframes secondary-line-reveal {
+		to {
+			opacity: 1;
+		}
+	}
+
+	@keyframes result-expand {
+		to {
+			transform: scaleX(1);
+		}
+	}
+
+	@keyframes plot-expand {
+		to {
+			transform: scaleX(1);
+		}
 	}
 }
 

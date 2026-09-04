@@ -38,7 +38,7 @@ const artifactLabels = {
 			<p>{project.statement}</p>
 		</header>
 
-		<section class="case-evidence" aria-label="Project evidence" data-motion>
+		<section class="case-evidence" aria-label="Project evidence" data-motion data-trace-rule>
 			<div class="case-evidence-primary">
 				<p class="mono-label">{primaryFact.label}</p>
 				<p class="case-evidence-value">{primaryFact.value}</p>
@@ -62,7 +62,7 @@ const artifactLabels = {
 			</div>
 		</section>
 
-		<figure class="case-artifact project-artifact" data-motion>
+		<figure class="case-artifact project-artifact" data-motion data-trace-rule>
 			<figcaption>
 				<p class="mono-label">System view</p>
 				<span>{artifactLabels[project.artifact]}</span>
@@ -72,14 +72,14 @@ const artifactLabels = {
 			</div>
 		</figure>
 
-		<section class="evidence-section" aria-labelledby="problem-title" data-motion>
+		<section class="evidence-section" aria-labelledby="problem-title" data-motion data-trace-rule>
 			<h2 class="mono-label" id="problem-title">Problem</h2>
 			<div class="evidence-section-body">
 				<p class="evidence-lede">{project.problem}</p>
 			</div>
 		</section>
 
-		<section class="evidence-section" aria-labelledby="approach-title" data-motion>
+		<section class="evidence-section" aria-labelledby="approach-title" data-motion data-trace-rule>
 			<h2 class="mono-label" id="approach-title">Engineering approach</h2>
 			<div class="evidence-section-body">
 				<ol class="evidence-list">
@@ -92,7 +92,7 @@ const artifactLabels = {
 			</aside>
 		</section>
 
-		<section class="evidence-section" aria-labelledby="outcome-title" data-motion>
+		<section class="evidence-section" aria-labelledby="outcome-title" data-motion data-trace-rule>
 			<h2 class="mono-label" id="outcome-title">What the evidence supports</h2>
 			<div class="evidence-section-body">
 				<p>{project.outcome}</p>
@@ -111,7 +111,7 @@ const artifactLabels = {
 			</div>
 		</section>
 
-		<nav class="case-nav" aria-label="Case study navigation" data-motion>
+		<nav class="case-nav" aria-label="Case study navigation" data-motion data-trace-rule>
 			<a class="index-link" href="/work">
 				<span class="mono-label">Index</span>
 				<strong>All work</strong>

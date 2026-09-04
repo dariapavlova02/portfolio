@@ -1,0 +1,151 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import MarketDataFlow from "../../components/MarketDataFlow.astro";
+import PublicationRegister from "../../components/PublicationRegister.astro";
+import ResearchFlow from "../../components/ResearchFlow.astro";
+import ResearchResultsPlot from "../../components/ResearchResultsPlot.astro";
+import { publications, type Publication } from "../../data/publications";
+
+interface Props {
+	publication: Publication;
+	nextPublication: Publication;
+}
+
+export function getStaticPaths() {
+	return publications.map((publication, index) => ({
+		params: { slug: publication.slug },
+		props: {
+			publication,
+			nextPublication: publications[(index + 1) % publications.length],
+		},
+	}));
+}
+
+const { publication, nextPublication } = Astro.props;
+const otherPublications = publications.filter((item) => item.slug !== publication.slug);
+---
+
+<BaseLayout title={`${publication.title} — Daria Pavlova`} description={publication.description}>
+	<Header current="research" />
+	<main id="main-content" class="interior-page page-frame">
+		<header class="interior-intro research-intro" data-motion>
+			<p class="eyebrow">{publication.recordLabel}</p>
+			<h1>{publication.title}</h1>
+			<p>{publication.description}</p>
+		</header>
+
+		<nav class="research-context" aria-label="Research record navigation" data-motion data-trace-rule>
+			<a href="/research"><span aria-hidden="true">←</span> Research index</a>
+			<span>{publication.number} / {String(publications.length).padStart(2, "0")}</span>
+			<a href={`/research/${nextPublication.slug}`}>Next record <span aria-hidden="true">→</span></a>
+		</nav>
+
+		<section class="research-meta" aria-label="Publication metadata" data-motion data-trace-rule>
+			<div>
+				<p class="mono-label">Authors</p>
+				<p>{publication.authors.map((author) => <>{author}<br /></>)}</p>
+			</div>
+			<div>
+				<p class="mono-label">Venue</p>
+				<p>{publication.venue.map((line) => <>{line}<br /></>)}</p>
+			</div>
+			<div>
+				<p class="mono-label">Access</p>
+				<ul>
+					<li><a href={publication.paperUrl} target="_blank" rel="noreferrer">Paper (PDF) ↗</a></li>
+					{publication.repositoryUrl && (
+						<li><a href={publication.repositoryUrl} target="_blank" rel="noreferrer">Code and artifacts ↗</a></li>
+					)}
+				</ul>
+			</div>
+		</section>
+
+		<section
+			class:list={["research-comparison", { "research-comparison--three": publication.facts.length === 3 }]}
+			aria-label="Publication evidence"
+			data-motion
+			data-trace-rule
+		>
+			{publication.facts.map((fact) => (
+				<div>
+					<p class="mono-label">{fact.label}</p>
+					<p class="research-comparison-value">{fact.value}</p>
+					<p>{fact.note}</p>
+				</div>
+			))}
+		</section>
+
+		<section class="evidence-section" aria-labelledby="question-title" data-motion data-trace-rule>
+			<h2 class="mono-label" id="question-title">Research question</h2>
+			<div class="evidence-section-body">
+				<p class="evidence-lede">{publication.question}</p>
+				<p>{publication.context}</p>
+			</div>
+		</section>
+
+		<section class="evidence-section evidence-section--figure" aria-labelledby="system-title" data-motion data-trace-rule>
+			<h2 class="mono-label" id="system-title">System view</h2>
+			<div class="evidence-section-body evidence-section-body--wide research-figure">
+				{publication.artifact === "graph-evaluation" ? <ResearchFlow /> : <MarketDataFlow />}
+				<p class="figure-note">{publication.artifactNote}</p>
+			</div>
+		</section>
+
+		<section class="evidence-section" aria-labelledby="method-title" data-motion data-trace-rule>
+			<h2 class="mono-label" id="method-title">Method</h2>
+			<div class="evidence-section-body">
+				<ol class="evidence-list">
+					{publication.method.map((step) => <li>{step}</li>)}
+				</ol>
+			</div>
+			<aside class="evidence-section-aside">
+				<p class="mono-label">Evidence status</p>
+				<p>{publication.results.reading}</p>
+			</aside>
+		</section>
+
+		<section class="evidence-section evidence-section--results" aria-labelledby="results-title" data-motion data-trace-rule>
+			<h2 class="mono-label" id="results-title">Results</h2>
+			<div class="evidence-section-body evidence-section-body--wide">
+				{publication.artifact === "graph-evaluation" && <ResearchResultsPlot />}
+				<div class="evidence-table-wrap">
+					<table class="evidence-table">
+						<thead>
+							<tr>
+								{publication.results.columns.map((column) => <th scope="col">{column}</th>)}
+							</tr>
+						</thead>
+						<tbody>
+							{publication.results.rows.map((row) => (
+								<tr>{row.map((cell) => <td>{cell}</td>)}</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+				<p class="result-reading"><strong>Reading:</strong> {publication.results.reading}</p>
+			</div>
+		</section>
+
+		<section class="evidence-section" aria-labelledby="limits-title" data-motion data-trace-rule>
+			<h2 class="mono-label" id="limits-title">Limits</h2>
+			<div class="evidence-section-body">
+				<ul class="evidence-list evidence-list--plain">
+					{publication.limits.map((limit) => <li>{limit}</li>)}
+				</ul>
+				<div class="evidence-actions">
+					{publication.repositoryUrl && (
+						<a class="arrow-link" href={publication.repositoryUrl} target="_blank" rel="noreferrer"><span>Repository</span><span aria-hidden="true">→</span></a>
+					)}
+					<a class="arrow-link" href={publication.paperUrl} target="_blank" rel="noreferrer"><span>Published paper</span><span aria-hidden="true">→</span></a>
+				</div>
+			</div>
+		</section>
+
+		{otherPublications.length > 0 && (
+			<PublicationRegister publications={otherPublications} heading="Other research" compact />
+		)}
+	</main>
+	<Footer />
+</BaseLayout>

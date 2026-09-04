@@ -1,0 +1,52 @@
+---
+import type { Publication } from "../data/publications";
+
+interface Props {
+	publications: Publication[];
+	heading?: string;
+	currentSlug?: string;
+	compact?: boolean;
+}
+
+const {
+	publications,
+	heading = "Publication register",
+	currentSlug,
+	compact = false,
+} = Astro.props;
+const columns = compact && publications.length === 1 ? 2 : Math.min(Math.max(publications.length, 1), 4);
+---
+
+<section
+	class:list={["publication-register", { "publication-register--compact": compact }]}
+	aria-labelledby={`publication-register-${heading.toLowerCase().replaceAll(" ", "-")}`}
+	data-motion
+	data-trace-rule
+>
+	<header class="publication-register-header">
+		<h2 class="mono-label" id={`publication-register-${heading.toLowerCase().replaceAll(" ", "-")}`}>{heading}</h2>
+		<p>{String(publications.length).padStart(2, "0")} {publications.length === 1 ? "record" : "records"}</p>
+	</header>
+	<nav
+		class="publication-grid"
+		aria-label={heading}
+		style={`--publication-columns: ${columns}`}
+	>
+		{publications.map((publication) => (
+			<a
+				class="publication-entry"
+				href={`/research/${publication.slug}`}
+				aria-current={publication.slug === currentSlug ? "page" : undefined}
+			>
+				<span class="publication-entry-index mono-label">{publication.number} / {publication.year}</span>
+				<span class="publication-entry-type">{publication.type}</span>
+				<h3>{publication.shortTitle}</h3>
+				<p>{publication.description}</p>
+				<span class="publication-entry-action">
+					{publication.slug === currentSlug ? "Current record" : "Open record"}
+					<span aria-hidden="true">→</span>
+				</span>
+			</a>
+		))}
+	</nav>
+</section>

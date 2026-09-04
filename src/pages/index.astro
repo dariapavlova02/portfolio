@@ -14,7 +14,7 @@ import { projects } from "../data/projects";
 		<EditorialIntro />
 		<FeaturedEvidence project={projects[0]} />
 
-		<section class="selected-work page-frame" id="work" aria-labelledby="work-title" data-motion>
+		<section class="selected-work page-frame" id="work" aria-labelledby="work-title" data-motion data-trace-rule>
 			<header class="section-header">
 				<h2 class="mono-label" id="work-title">Selected work</h2>
 				<a class="arrow-link arrow-link--compact" href="/work">
@@ -27,7 +27,7 @@ import { projects } from "../data/projects";
 			</div>
 		</section>
 
-		<section class="more-work page-frame" aria-label="More work" data-motion>
+		<section class="more-work page-frame" aria-label="More work" data-motion data-trace-rule>
 			<span class="more-work-mark" aria-hidden="true">↗</span>
 			<p>More case studies, technical notes<br />and experiments.</p>
 			<a class="arrow-link arrow-link--compact" href="/work">
