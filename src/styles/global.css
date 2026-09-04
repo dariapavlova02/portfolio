@@ -1,12 +1,14 @@
 @import "tailwindcss";
 
 :root {
-	--paper: #f4f2ed;
-	--ink: #11110f;
-	--muted: #5f5f59;
-	--light-fill: #d8d6d0;
-	--rule: rgba(17, 17, 15, 0.4);
-	--soft-rule: rgba(17, 17, 15, 0.18);
+	--paper: #faf3e1;
+	--cream: #f5e7c6;
+	--ink: #222222;
+	--accent: #fa8112;
+	--muted: #626058;
+	--light-fill: color-mix(in srgb, var(--ink) 18%, var(--cream));
+	--rule: rgba(34, 34, 34, 0.4);
+	--soft-rule: rgba(34, 34, 34, 0.18);
 	--serif: "Source Serif 4 Variable", Georgia, serif;
 	--sans: "Inter Variable", Arial, sans-serif;
 	--mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
@@ -38,8 +40,8 @@ body {
 }
 
 ::selection {
-	background: var(--ink);
-	color: var(--paper);
+	background: var(--accent);
+	color: var(--ink);
 }
 
 a {
@@ -118,6 +120,7 @@ a:focus-visible {
 	height: 1px;
 	background: currentColor;
 	content: "";
+	background-color: var(--accent);
 	transform: scaleX(0);
 	transform-origin: right;
 }
@@ -268,6 +271,7 @@ a:focus-visible {
 }
 
 .arrow-link span:last-child {
+	color: var(--accent);
 	font-family: var(--sans);
 	font-size: 1.35rem;
 	font-weight: 400;
@@ -421,6 +425,11 @@ a:focus-visible {
 	stroke-dasharray: 4 5;
 }
 
+.artifact-box,
+.artifact-boxes rect {
+	fill: var(--cream);
+}
+
 .artifact-arrowhead {
 	fill: var(--ink);
 	stroke: none;
@@ -444,14 +453,14 @@ a:focus-visible {
 }
 
 .graph-nodes circle {
-	fill: var(--paper);
+	fill: var(--cream);
 	stroke: var(--rule);
 	stroke-width: 1;
 	vector-effect: non-scaling-stroke;
 }
 
 .graph-nodes .graph-node--primary {
-	fill: var(--ink);
+	fill: var(--accent);
 	stroke: var(--ink);
 }
 
