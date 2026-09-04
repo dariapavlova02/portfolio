@@ -82,116 +82,87 @@
 		animation: trace-rule 720ms cubic-bezier(0.22, 1, 0.36, 1) both;
 	}
 
-	html.motion-capable [data-motion] .technical-artifact .artifact-lines line,
-	html.motion-capable [data-motion] .technical-artifact .artifact-lines path,
-	html.motion-capable [data-motion] .technical-artifact .artifact-line,
-	html.motion-capable [data-motion] .technical-artifact .artifact-box,
-	html.motion-capable [data-motion] .technical-artifact .artifact-boxes rect {
+	html.motion-capable .technical-artifact .artifact-lines line,
+	html.motion-capable .technical-artifact .artifact-lines path,
+	html.motion-capable .technical-artifact .artifact-line,
+	html.motion-capable .technical-artifact .artifact-box,
+	html.motion-capable .technical-artifact .artifact-boxes rect {
 		stroke-dasharray: 900;
 		stroke-dashoffset: 900;
 	}
 
-	html.motion-capable [data-motion].is-in-view .technical-artifact .artifact-lines line,
-	html.motion-capable [data-motion].is-in-view .technical-artifact .artifact-lines path,
-	html.motion-capable [data-motion].is-in-view .technical-artifact .artifact-line,
-	html.motion-capable [data-motion].is-in-view .technical-artifact .artifact-box,
-	html.motion-capable [data-motion].is-in-view .technical-artifact .artifact-boxes rect {
+	html.motion-capable .technical-artifact.is-in-view .artifact-lines line,
+	html.motion-capable .technical-artifact.is-in-view .artifact-lines path,
+	html.motion-capable .technical-artifact.is-in-view .artifact-line,
+	html.motion-capable .technical-artifact.is-in-view .artifact-box,
+	html.motion-capable .technical-artifact.is-in-view .artifact-boxes rect {
 		animation: technical-draw 920ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
 	}
 
-	html.motion-capable [data-motion].is-in-view .technical-artifact .artifact-lines:not(.artifact-lines--secondary) {
+	html.motion-capable .technical-artifact.is-in-view .artifact-lines:not(.artifact-lines--secondary) {
 		animation: trace-color 1.15s ease 120ms;
 	}
 
-	html.motion-capable [data-motion].is-in-view .technical-artifact .artifact-lines--secondary line,
-	html.motion-capable [data-motion].is-in-view .technical-artifact .artifact-lines--secondary path {
+	html.motion-capable .technical-artifact.is-in-view .artifact-lines--secondary line,
+	html.motion-capable .technical-artifact.is-in-view .artifact-lines--secondary path {
 		animation: secondary-line-reveal 480ms ease 420ms forwards;
 	}
 
-	html.motion-capable [data-motion] .technical-artifact .artifact-lines--secondary line,
-	html.motion-capable [data-motion] .technical-artifact .artifact-lines--secondary path {
+	html.motion-capable .technical-artifact .artifact-lines--secondary line,
+	html.motion-capable .technical-artifact .artifact-lines--secondary path {
 		stroke-dasharray: 4 5;
 		stroke-dashoffset: 0;
 		opacity: 0;
 	}
 
-	html.motion-capable [data-motion] .technical-artifact .artifact-labels,
-	html.motion-capable [data-motion] .technical-artifact .artifact-placeholder,
-	html.motion-capable [data-motion] .technical-artifact .artifact-arrowhead,
-	html.motion-capable [data-motion] .technical-artifact .research-flow-notes,
-	html.motion-capable [data-motion] .technical-artifact .graph-labels,
-	html.motion-capable [data-motion] .technical-artifact .graph-metadata {
+	html.motion-capable .technical-artifact .artifact-labels,
+	html.motion-capable .technical-artifact .artifact-placeholder,
+	html.motion-capable .technical-artifact .artifact-arrowhead,
+	html.motion-capable .technical-artifact .graph-labels,
+	html.motion-capable .technical-artifact .graph-metadata {
 		opacity: 0;
 	}
 
-	html.motion-capable [data-motion].is-in-view .technical-artifact .artifact-labels,
-	html.motion-capable [data-motion].is-in-view .technical-artifact .artifact-placeholder,
-	html.motion-capable [data-motion].is-in-view .technical-artifact .artifact-arrowhead,
-	html.motion-capable [data-motion].is-in-view .technical-artifact .research-flow-notes,
-	html.motion-capable [data-motion].is-in-view .technical-artifact .graph-labels,
-	html.motion-capable [data-motion].is-in-view .technical-artifact .graph-metadata {
+	html.motion-capable .technical-artifact.is-in-view .artifact-labels,
+	html.motion-capable .technical-artifact.is-in-view .artifact-placeholder,
+	html.motion-capable .technical-artifact.is-in-view .artifact-arrowhead,
+	html.motion-capable .technical-artifact.is-in-view .graph-labels,
+	html.motion-capable .technical-artifact.is-in-view .graph-metadata {
 		opacity: 1;
 		transition: opacity 380ms ease 380ms;
 	}
 
-	html.motion-capable [data-motion] .technical-artifact .graph-nodes circle,
-	html.motion-capable [data-motion] .technical-artifact .search-results circle {
+	html.motion-capable .technical-artifact .graph-nodes circle,
+	html.motion-capable .technical-artifact .search-results circle {
 		opacity: 0;
 		transform: scale(0.65);
 		transform-box: fill-box;
 		transform-origin: center;
 	}
 
-	html.motion-capable [data-motion].is-in-view .technical-artifact .graph-nodes circle,
-	html.motion-capable [data-motion].is-in-view .technical-artifact .search-results circle {
+	html.motion-capable .technical-artifact.is-in-view .graph-nodes circle,
+	html.motion-capable .technical-artifact.is-in-view .search-results circle {
 		animation: technical-node 420ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
 		animation-delay: 360ms;
 	}
 
-	html.motion-capable [data-motion].is-in-view .technical-artifact .graph-nodes circle:nth-child(2n) {
+	html.motion-capable .technical-artifact.is-in-view .graph-nodes circle:nth-child(2n) {
 		animation-delay: 440ms;
 	}
 
-	html.motion-capable [data-motion].is-in-view .technical-artifact .graph-nodes circle:nth-child(3n) {
+	html.motion-capable .technical-artifact.is-in-view .graph-nodes circle:nth-child(3n) {
 		animation-delay: 520ms;
 	}
 
-	html.motion-capable [data-motion] .technical-artifact .search-results rect {
+	html.motion-capable .technical-artifact .search-results rect {
 		transform: scaleX(0);
 		transform-box: fill-box;
 		transform-origin: left;
 	}
 
-	html.motion-capable [data-motion].is-in-view .technical-artifact .search-results rect {
+	html.motion-capable .technical-artifact.is-in-view .search-results rect {
 		animation: result-expand 620ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
 		animation-delay: 420ms;
-	}
-
-	html.motion-capable [data-motion] .plot-fill,
-	html.motion-capable [data-motion] .plot-range {
-		transform: scaleX(0);
-	}
-
-	html.motion-capable [data-motion] .plot-range {
-		transform-origin: center;
-	}
-
-	html.motion-capable [data-motion].is-in-view .plot-fill,
-	html.motion-capable [data-motion].is-in-view .plot-range {
-		animation: plot-expand 900ms cubic-bezier(0.22, 1, 0.36, 1) 180ms forwards;
-	}
-
-	html.motion-capable [data-motion] .plot-dot {
-		opacity: 0;
-		transform: translate(-50%, calc(-50% + 7px));
-	}
-
-	html.motion-capable [data-motion].is-in-view .plot-dot {
-		opacity: 1;
-		transform: translate(-50%, -50%);
-		transition:
-			opacity 320ms ease 720ms,
-			transform 420ms cubic-bezier(0.22, 1, 0.36, 1) 680ms;
 	}
 
 	.evidence-table tbody tr,
@@ -252,12 +223,6 @@
 	}
 
 	@keyframes result-expand {
-		to {
-			transform: scaleX(1);
-		}
-	}
-
-	@keyframes plot-expand {
 		to {
 			transform: scaleX(1);
 		}

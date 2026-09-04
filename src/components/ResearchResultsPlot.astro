@@ -1,37 +1,47 @@
-<div class="research-plots" aria-label="Corrected model comparison charts">
-	<figure class="research-plot">
-		<figcaption>
-			<span class="mono-label">Chronological holdout</span>
-			<span>AUC · axis 0.70–0.85</span>
-		</figcaption>
-		<div class="plot-scale" aria-hidden="true"><span>0.70</span><span>0.85</span></div>
-		<div class="plot-row" aria-label="Baseline AUC 0.823">
-			<span>Baseline</span>
-			<span class="plot-track"><span class="plot-fill" style="--plot-value: 82%"></span><span class="plot-dot" style="--plot-position: 82%"></span></span>
-			<strong>0.823</strong>
-		</div>
-		<div class="plot-row" aria-label="Graph-enriched AUC 0.817">
-			<span>Graph-enriched</span>
-			<span class="plot-track"><span class="plot-fill plot-fill--accent" style="--plot-value: 78%"></span><span class="plot-dot plot-dot--accent" style="--plot-position: 78%"></span></span>
-			<strong>0.817</strong>
-		</div>
-	</figure>
+---
+const comparisons = [
+	{
+		title: "Chronological holdout",
+		note: "AUC on the held-out period",
+		models: [
+			{ name: "Baseline", mean: 0.823, deviation: 0 },
+			{ name: "Graph-enriched", mean: 0.817, deviation: 0 },
+		],
+	},
+	{
+		title: "Temporal cross-validation",
+		note: "Mean AUC ± standard deviation · 5 folds",
+		models: [
+			{ name: "Baseline", mean: 0.775, deviation: 0.090 },
+			{ name: "Graph-enriched", mean: 0.787, deviation: 0.074 },
+		],
+	},
+];
+const position = (value: number) => `${((value - 0.6) / 0.3) * 100}%`;
+---
 
-	<figure class="research-plot">
-		<figcaption>
-			<span class="mono-label">Expanding-window CV</span>
-			<span>Mean AUC ± std · axis 0.60–0.90</span>
-		</figcaption>
-		<div class="plot-scale" aria-hidden="true"><span>0.60</span><span>0.90</span></div>
-		<div class="plot-row plot-row--interval" aria-label="Baseline AUC 0.775 plus or minus 0.090">
-			<span>Baseline</span>
-			<span class="plot-track"><span class="plot-range" style="--range-left: 28%; --range-width: 60%"></span><span class="plot-dot" style="--plot-position: 58%"></span></span>
-			<strong>0.775</strong>
-		</div>
-		<div class="plot-row plot-row--interval" aria-label="Graph-enriched AUC 0.787 plus or minus 0.074">
-			<span>Graph-enriched</span>
-			<span class="plot-track"><span class="plot-range plot-range--accent" style="--range-left: 38%; --range-width: 49%"></span><span class="plot-dot plot-dot--accent" style="--plot-position: 62%"></span></span>
-			<strong>0.787</strong>
-		</div>
-	</figure>
+<div class="model-comparisons" aria-label="Corrected model comparison; both charts use an AUC scale from 0.60 to 0.90">
+	{comparisons.map((comparison) => (
+		<figure class="model-chart" data-motion="chart">
+			<figcaption>
+				<h3>{comparison.title}</h3>
+				<p>{comparison.note}</p>
+			</figcaption>
+			<div class="model-chart-axis" aria-hidden="true">
+				{["0.60", "0.70", "0.80", "0.90"].map((tick) => <span>{tick}</span>)}
+			</div>
+			{comparison.models.map((model, index) => (
+				<div class:list={["model-chart-row", { "model-chart-row--enriched": index === 1 }]}
+					style={`--chart-delay: ${index * 140}ms`}
+					aria-label={`${model.name}: AUC ${model.mean.toFixed(3)}${model.deviation ? `, standard deviation ${model.deviation.toFixed(3)}` : ""}`}>
+					<span class="model-chart-label">{model.name}</span>
+					<div class="model-chart-track" aria-hidden="true">
+						{model.deviation > 0 && <span class="model-chart-range" style={`left: ${position(model.mean - model.deviation)}; width: ${(model.deviation * 2 / 0.3) * 100}%`} />}
+						<span class="model-chart-dot" style={`left: ${position(model.mean)}`} />
+					</div>
+					<span class="model-chart-value">{model.mean.toFixed(3)}</span>
+				</div>
+			))}
+		</figure>
+	))}
 </div>

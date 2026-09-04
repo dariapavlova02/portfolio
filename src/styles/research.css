@@ -1,0 +1,444 @@
+/* Research records share the site's paper, type and rule system. */
+.research-page {
+	max-width: 1320px;
+}
+
+.research-page .research-intro {
+	min-height: 0;
+	padding-block: clamp(3.5rem, 6vw, 6rem) clamp(3rem, 4.5vw, 4.5rem);
+	row-gap: 1.75rem;
+}
+
+.research-page .research-intro .eyebrow {
+	max-width: 10rem;
+	padding-top: 0.5rem;
+	color: var(--muted);
+}
+
+.research-page .research-intro h1 {
+	grid-column: 3 / 13;
+	max-width: 29ch;
+	font-size: clamp(2.5rem, 4.3vw, 4.3rem);
+	line-height: 1.06;
+	letter-spacing: -0.035em;
+	text-wrap: balance;
+}
+
+.research-page .research-intro > p:last-child {
+	grid-column: 3 / 11;
+	max-width: 58ch;
+	font-size: 1.0625rem;
+	line-height: 1.65;
+	color: var(--muted);
+}
+
+.research-page .research-meta {
+	border-top: 0;
+	padding-block: 1.75rem 2rem;
+}
+
+.research-page .research-comparison-value {
+	font-size: clamp(2.5rem, 4vw, 3.75rem);
+	line-height: 1.1;
+}
+
+.research-page .evidence-section {
+	padding-block: clamp(2.75rem, 4.5vw, 4.5rem);
+	border-color: var(--soft-rule);
+}
+
+.research-page .evidence-section > h2 {
+	padding-top: 0.35rem;
+	color: var(--muted);
+}
+
+.research-page .evidence-section-body {
+	grid-column: 3 / 12;
+}
+
+.research-page .evidence-section-body--wide {
+	grid-column: 3 / 13;
+}
+
+.research-page .evidence-section-body > p {
+	max-width: 64ch;
+	line-height: 1.75;
+}
+
+.research-page .evidence-lede {
+	max-width: 48ch !important;
+	font-size: clamp(1.45rem, 2vw, 1.8rem);
+	line-height: 1.45 !important;
+	margin-bottom: 1.2rem;
+}
+
+.research-page .evidence-list {
+	max-width: 68ch;
+}
+
+.research-page .evidence-list li {
+	grid-template-columns: 2rem 1fr;
+	padding-block: 1.2rem;
+	line-height: 1.7;
+}
+
+.research-page .evidence-list--plain li {
+	grid-template-columns: 1rem 1fr;
+}
+
+.research-page .research-figure {
+	margin: 0;
+	overflow: visible;
+}
+
+.study-figure-heading {
+	margin-bottom: 2.5rem;
+}
+
+.study-figure-heading .mono-label {
+	color: var(--muted);
+}
+
+.study-figure-heading h3 {
+	margin: 0.65rem 0 0;
+	font-family: var(--serif);
+	font-size: clamp(1.6rem, 2.4vw, 2.15rem);
+	font-weight: 400;
+	letter-spacing: -0.02em;
+	line-height: 1.2;
+}
+
+.study-flow {
+	--flow-gap: clamp(2rem, 3.5vw, 3.5rem);
+	display: grid;
+	grid-template-columns: 1fr 1.25fr 1fr;
+	gap: var(--flow-gap);
+}
+
+.study-stage {
+	display: grid;
+	grid-template-rows: auto 1fr;
+	min-width: 0;
+	border-top: 1px solid var(--rule);
+}
+
+.study-stage-label {
+	display: flex;
+	gap: 0.75rem;
+	margin: 0;
+	padding-top: 1rem;
+	font-family: var(--mono);
+	font-size: 0.65rem;
+	line-height: 1.5;
+	letter-spacing: 0.035em;
+	text-transform: uppercase;
+}
+
+.study-stage-label > span {
+	color: var(--muted);
+}
+
+.study-stage-content {
+	position: relative;
+	align-self: center;
+	padding-block: 2rem;
+}
+
+.study-stage h3 {
+	margin: 0 0 0.65rem;
+	font-family: var(--serif);
+	font-size: clamp(1.2rem, 1.65vw, 1.55rem);
+	font-weight: 450;
+	letter-spacing: -0.015em;
+	line-height: 1.2;
+	text-wrap: auto;
+}
+
+.study-stage-content > p,
+.study-model > p {
+	margin: 0;
+	color: var(--muted);
+	font-size: 0.85rem;
+	line-height: 1.6;
+	text-wrap: pretty;
+}
+
+.study-link {
+	position: absolute;
+	top: 50%;
+	display: block;
+	width: 24px;
+	height: 12px;
+	color: var(--muted);
+	transform: translateY(-50%);
+	pointer-events: none;
+}
+
+.study-link--out { left: calc(100% + var(--flow-gap) / 2 - 12px); }
+.study-link--in { right: calc(100% + var(--flow-gap) / 2 - 12px); }
+
+.study-models {
+	display: grid;
+	grid-template-rows: repeat(2, 1fr);
+	row-gap: 1.75rem;
+	align-content: center;
+	padding-block: 1.65rem;
+}
+
+.study-model {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	border-left: 2px solid var(--ink);
+	padding: 0.25rem 0 0.35rem 1.25rem;
+}
+
+.study-model--enriched { border-color: var(--accent); }
+.study-addition { display: block; margin-top: 0.3rem; }
+
+.study-flow--market .study-model { position: relative; border-color: var(--soft-rule); }
+.study-link--down {
+	top: -0.875rem;
+	left: calc(1.25rem - 12px);
+	transform: translateY(-50%) rotate(90deg);
+}
+
+.study-constraint {
+	display: block;
+	margin-top: 1rem;
+	border-top: 1px solid var(--soft-rule);
+	padding-top: 0.65rem;
+	color: var(--muted);
+	font-size: 0.75rem;
+	line-height: 1.5;
+}
+
+.research-page .figure-note {
+	max-width: none !important;
+	margin: 1rem 0 0 !important;
+	border-top: 1px solid var(--soft-rule);
+	padding-top: 1.25rem;
+	font-size: 0.875rem;
+	line-height: 1.7;
+	text-wrap: pretty;
+}
+
+.figure-note > p { max-width: 82ch; margin: 0; }
+.result-ledger { display: none; }
+
+.model-comparisons {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 2.5rem;
+	margin-bottom: 3rem;
+}
+
+.model-chart { margin: 0; min-width: 0; }
+
+.model-chart figcaption h3 {
+	margin: 0 0 0.5rem;
+	font-family: var(--serif);
+	font-size: 1.4rem;
+	font-weight: 450;
+	letter-spacing: -0.02em;
+}
+
+.model-chart figcaption p {
+	margin: 0 0 2rem;
+	color: var(--muted);
+	font-size: 0.75rem;
+	line-height: 1.5;
+}
+
+.model-chart-axis {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 0.2rem;
+	color: var(--muted);
+	font-family: var(--mono);
+	font-size: 0.625rem;
+}
+
+.model-chart-row {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	gap: 0.8rem;
+	padding-block: 1rem;
+	font-size: 0.8125rem;
+}
+
+.model-chart-value {
+	grid-column: 2;
+	grid-row: 1;
+	font-family: var(--mono);
+	font-size: 0.75rem;
+	font-variant-numeric: tabular-nums;
+}
+
+.model-chart-track {
+	position: relative;
+	grid-column: 1 / -1;
+	height: 1px;
+	margin-block: 0.25rem;
+	background: var(--soft-rule);
+}
+
+.model-chart-dot {
+	position: absolute;
+	top: 50%;
+	width: 8px;
+	height: 8px;
+	border: 1px solid var(--ink);
+	border-radius: 50%;
+	background: var(--ink);
+	transform: translate(-50%, -50%);
+}
+
+.model-chart-range {
+	position: absolute;
+	top: -3px;
+	height: 7px;
+	border-inline: 1px solid var(--ink);
+	background: color-mix(in srgb, var(--ink) 15%, var(--paper));
+}
+
+.model-chart-row--enriched .model-chart-dot { background: var(--accent); }
+.model-chart-row--enriched .model-chart-range { background: color-mix(in srgb, var(--accent) 24%, var(--paper)); }
+
+/* Reveal each chart when it enters the viewport; positions and values stay fixed. */
+@media (prefers-reduced-motion: no-preference) {
+	html.motion-capable .model-chart-track {
+		background: transparent;
+	}
+
+	html.motion-capable .model-chart-track::before {
+		position: absolute;
+		inset: 0;
+		background: var(--soft-rule);
+		content: "";
+		transform: scaleX(0);
+		transform-origin: left;
+	}
+
+	html.motion-capable .model-chart:not(.is-in-view) .model-chart-dot,
+	html.motion-capable .model-chart:not(.is-in-view) .model-chart-range,
+	html.motion-capable .model-chart:not(.is-in-view) .model-chart-value {
+		opacity: 0;
+	}
+
+	html.motion-capable .model-chart.is-in-view .model-chart-track::before {
+		animation: chart-axis-reveal 700ms cubic-bezier(0.22, 1, 0.36, 1) var(--chart-delay) both;
+	}
+
+	html.motion-capable .model-chart.is-in-view .model-chart-dot {
+		animation: chart-point-reveal 650ms cubic-bezier(0.22, 1, 0.36, 1) calc(200ms + var(--chart-delay)) both;
+	}
+
+	html.motion-capable .model-chart.is-in-view .model-chart-range {
+		transform-origin: center;
+		animation: chart-interval-reveal 900ms cubic-bezier(0.22, 1, 0.36, 1) calc(250ms + var(--chart-delay)) both;
+	}
+
+	html.motion-capable .model-chart.is-in-view .model-chart-value {
+		animation: chart-value-reveal 500ms ease calc(350ms + var(--chart-delay)) both;
+	}
+
+	html.motion-capable .study-stage[data-motion] { transform: none; }
+	html.motion-capable .study-stage:nth-child(2).is-in-view { transition-delay: 100ms; }
+	html.motion-capable .study-stage:nth-child(3).is-in-view { transition-delay: 200ms; }
+	html.motion-capable .study-stage:not(.is-in-view) .study-link path { stroke-dasharray: 40; stroke-dashoffset: 40; }
+	html.motion-capable .study-stage.is-in-view .study-link path {
+		stroke-dasharray: 40;
+		animation: study-arrow-reveal 700ms cubic-bezier(0.22, 1, 0.36, 1) 350ms both;
+	}
+
+	@keyframes chart-axis-reveal {
+		to { transform: scaleX(1); }
+	}
+	@keyframes chart-point-reveal {
+		from { opacity: 0; transform: translate(-50%, -50%) scale(0.25); }
+		to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+	}
+	@keyframes chart-interval-reveal {
+		from { opacity: 0; transform: scaleX(0); }
+		to { opacity: 1; transform: scaleX(1); }
+	}
+	@keyframes chart-value-reveal {
+		from { opacity: 0; }
+		to { opacity: 1; }
+	}
+	@keyframes study-arrow-reveal {
+		from { stroke-dashoffset: 40; }
+		to { stroke-dashoffset: 0; }
+	}
+}
+
+.research-page .evidence-table { min-width: 640px; }
+.research-page .evidence-table thead th { font-size: 0.625rem; line-height: 1.5; vertical-align: bottom; }
+.research-page .evidence-table td { font-size: 0.8125rem; }
+.research-page .evidence-table th, .research-page .evidence-table td { padding-right: 1rem; }
+.research-page .evidence-table tbody th {
+	border-bottom: 1px solid var(--soft-rule);
+	padding-block: 1rem;
+	font-family: var(--sans);
+	font-size: 0.8125rem;
+	font-weight: 500;
+	text-transform: none;
+	letter-spacing: 0;
+}
+
+.research-page .result-reading {
+	display: grid;
+	grid-template-columns: 8rem 1fr;
+	gap: 1.5rem;
+	max-width: none !important;
+	margin-top: 1.75rem !important;
+}
+
+.result-reading > .mono-label { padding-top: 0.25rem; }
+.result-reading > p { max-width: 65ch; margin: 0; line-height: 1.75; }
+.research-page .publication-register--compact { margin-top: 2rem; }
+.research-page .publication-register-header { border-top: 0; }
+
+/* Keep diagrams and text readable before columns become too narrow. */
+@media (max-width: 1100px) {
+	.research-page .evidence-section { grid-template-columns: 1fr; row-gap: 1.75rem; }
+	.research-page .evidence-section > h2,
+	.research-page .evidence-section-body,
+	.research-page .evidence-section-body--wide { grid-column: 1; }
+	.research-page .evidence-section-body { max-width: 72ch; }
+	.research-page .evidence-section-body--wide { max-width: none; }
+}
+
+@media (max-width: 720px) {
+	.research-page .research-intro { display: block; padding-block: 2.75rem 3rem; }
+	.research-page .research-intro .eyebrow { max-width: none; margin-bottom: 1.25rem; }
+	.research-page .research-intro h1 { font-size: clamp(2.1rem, 7.8vw, 3.25rem); line-height: 1.1; }
+	.research-page .research-intro > p:last-child { margin-top: 1.5rem; font-size: 1rem; }
+	.research-page .research-comparison { grid-template-columns: 1fr; }
+	.research-page .research-comparison > div { padding: 1.5rem 0 1.75rem; }
+	.research-page .research-comparison-value { font-size: clamp(2rem, 9vw, 3rem); }
+	.research-page .research-figure { margin-top: 1.75rem; }
+	.study-figure-heading { margin-bottom: 1.75rem; }
+	.study-flow { grid-template-columns: 1fr; gap: 0; }
+	.study-stage { grid-template-columns: 1fr; }
+	.study-stage-label { padding-top: 1rem; }
+	.study-stage-content, .study-models { padding-block: 1.25rem 1.75rem; }
+	.study-stage h3 { font-size: 1.4rem; }
+	.study-stage-content > p, .study-model > p { font-size: 0.9rem; max-width: 48ch; }
+	.study-link--out,
+	.study-link--in { display: none; }
+	.study-constraint { border-top: 0; padding-top: 0; }
+	.research-page .figure-note { margin-top: 0 !important; }
+	.model-comparisons { grid-template-columns: 1fr; gap: 2.25rem; margin-bottom: 2.25rem; }
+	.model-chart + .model-chart { border-top: 1px solid var(--soft-rule); padding-top: 1.75rem; }
+	.research-page .result-reading { grid-template-columns: 1fr; gap: 0.75rem; }
+	.research-page .evidence-table-wrap { display: none; }
+	.result-ledger { display: block; }
+	.result-record { border-top: 1px solid var(--rule); padding-block: 1.25rem 1.75rem; }
+	.result-record h3 { margin: 0 0 1.25rem; font-family: var(--serif); font-size: 1.4rem; font-weight: 450; }
+	.result-record dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; margin: 0; }
+	.result-record dt { margin-bottom: 0.35rem; color: var(--muted); font-size: 0.75rem; line-height: 1.45; }
+	.result-record dd { margin: 0; font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+	.result-record dl > div:last-child:nth-child(odd) { grid-column: 1 / -1; }
+}

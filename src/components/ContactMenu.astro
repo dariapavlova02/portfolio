@@ -1,0 +1,95 @@
+---
+import { contactChannels } from "../config";
+
+interface Props { placement?: "below" | "above"; }
+const { placement = "below" } = Astro.props;
+---
+
+<details class:list={["contact-menu", { "contact-menu--above": placement === "above" }]} data-contact-menu>
+	<summary>
+		Contact
+		<svg class="contact-chevron" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="m1 1 4 4 4-4" fill="none" stroke="currentColor" /></svg>
+	</summary>
+	<div class="contact-panel">
+		<ul class="contact-options">
+			{contactChannels.map((channel) => (
+					<li>
+						<a class="contact-option" href={channel.href} title={channel.detail}
+							aria-label={`${channel.name}: ${channel.detail}`}
+							target={channel.href.startsWith("https:") ? "_blank" : undefined}
+							rel={channel.href.startsWith("https:") ? "noreferrer" : undefined}>
+							<span>{channel.name}</span>
+							<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="m2 10 8-8M2 2h8v8" fill="none" stroke="currentColor" /></svg>
+						</a>
+					</li>
+			))}
+		</ul>
+	</div>
+</details>
+
+<script>
+	const hover = window.matchMedia("(hover: hover) and (pointer: fine)");
+	document.querySelectorAll<HTMLDetailsElement>("[data-contact-menu]").forEach((menu) => {
+		const summary = menu.querySelector("summary")!;
+		let mode: "hover" | "click" | null = null;
+		let closeTimer: ReturnType<typeof setTimeout>;
+		const close = () => { clearTimeout(closeTimer); menu.open = false; mode = null; };
+		menu.addEventListener("pointerenter", () => {
+			clearTimeout(closeTimer);
+			if (!hover.matches || menu.open) return;
+			menu.open = true;
+			mode = "hover";
+		});
+		menu.addEventListener("pointerleave", () => {
+			if (mode === "hover" && !menu.contains(document.activeElement)) closeTimer = setTimeout(close, 160);
+		});
+		summary.addEventListener("click", (event) => {
+			event.preventDefault();
+			clearTimeout(closeTimer);
+			if (menu.open && mode !== "hover") close();
+			else { menu.open = true; mode = "click"; }
+		});
+		menu.addEventListener("keydown", (event) => {
+			if (event.key !== "Escape" || !menu.open) return;
+			event.preventDefault();
+			close();
+			summary.focus();
+		});
+		menu.addEventListener("focusout", (event) => {
+			if (!menu.contains(event.relatedTarget as Node | null)) close();
+		});
+		document.addEventListener("pointerdown", (event) => {
+			if (!menu.contains(event.target as Node)) close();
+		});
+	});
+</script>
+
+<style>
+	.contact-menu { position: relative; }
+	summary { display: flex; align-items: center; gap: 0.55rem; padding-block: 0.5rem; list-style: none; cursor: pointer; }
+	summary::-webkit-details-marker { display: none; }
+	summary:focus-visible { outline: 1px solid var(--ink); outline-offset: 5px; }
+	.contact-chevron { transition: transform 180ms ease; }
+	.contact-menu[open] .contact-chevron { transform: rotate(180deg); }
+	.contact-panel { position: absolute; z-index: 60; top: calc(100% + 1.75rem); right: 0; width: 180px; padding: 0.35rem; border: 1px solid var(--soft-rule); background: var(--paper); box-shadow: 0 6px 18px rgb(34 34 34 / 5%); letter-spacing: 0; }
+	.contact-panel::before { position: absolute; bottom: 100%; right: 0; left: 0; height: 1.75rem; content: ""; }
+	.contact-options { margin: 0; padding: 0; list-style: none; }
+	.contact-option { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 44px; padding: 0.7rem 0.85rem; font-family: var(--mono); font-size: 0.78rem; font-weight: 500; line-height: 1.4; letter-spacing: 0.055em; transition: background-color 160ms ease; }
+	.contact-option::after { display: none; }
+	.contact-option svg { flex-shrink: 0; color: var(--muted); transition: color 160ms ease; }
+	.contact-option:hover, .contact-option:focus-visible { background: color-mix(in srgb, var(--cream) 65%, var(--paper)); }
+	.contact-option:focus-visible { outline: 1px solid var(--rule); outline-offset: -1px; }
+	.contact-option:hover svg, .contact-option:focus-visible svg { color: var(--ink); }
+	.contact-menu--above { position: static; }
+	.contact-menu--above .contact-panel { top: auto; bottom: calc(100% + 0.65rem); }
+	.contact-menu--above .contact-panel::before { bottom: auto; top: 100%; height: 0.65rem; }
+	.contact-menu--above summary { padding-block: 0; }
+	@media (max-width: 980px) {
+		.contact-menu:not(.contact-menu--above) { position: static; }
+		.contact-menu:not(.contact-menu--above) .contact-panel { top: calc(100% + 0.5rem); right: 0; }
+	}
+	@media (prefers-reduced-motion: no-preference) {
+		.contact-menu[open] .contact-panel { animation: contact-reveal 160ms ease both; }
+		@keyframes contact-reveal { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: none; } }
+	}
+</style>

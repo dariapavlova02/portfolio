@@ -1,5 +1,6 @@
 ---
 import { siteConfig } from "../config";
+import ContactMenu from "./ContactMenu.astro";
 
 interface Props {
 	current?: "home" | "work" | "research" | "notes" | "about";
@@ -14,7 +15,6 @@ const navigation = [
 	{ label: "About", href: "/about", key: "about" },
 	{ label: "GitHub", href: siteConfig.githubUrl, external: true },
 	{ label: "CV", href: siteConfig.cvUrl },
-	{ label: "Email", href: siteConfig.contactUrl },
 ];
 ---
 
@@ -34,6 +34,7 @@ const navigation = [
 					</a>
 				</li>
 			))}
+			<li><ContactMenu /></li>
 		</ul>
 	</nav>
 </header>

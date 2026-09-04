@@ -1,42 +1,36 @@
-<svg class="research-flow technical-artifact" viewBox="0 0 760 280" role="img" aria-labelledby="research-flow-title research-flow-desc">
-	<title id="research-flow-title">Leakage-aware evaluation flow</title>
-	<desc id="research-flow-desc">An incident dataset feeds shared baseline features and timestamp-eligible graph features. Baseline and graph-enriched models are compared using chronological evaluation.</desc>
-	<defs>
-		<marker id="research-flow-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
-			<path d="M0,0 L7,3.5 L0,7" class="artifact-arrowhead" />
-		</marker>
-	</defs>
+---
+import DiagramArrow from "./DiagramArrow.astro";
+---
 
-	<g class="artifact-lines" marker-end="url(#research-flow-arrow)">
-		<path d="M150 140 H205 V68 H258" />
-		<path d="M150 140 H205 V212 H258" />
-		<path d="M408 68 H470" />
-		<path d="M408 68 H438 V212 H470" />
-		<path d="M408 212 H470" />
-		<path d="M620 68 H652 V140 H680" />
-		<path d="M620 212 H652 V140 H680" />
-	</g>
-
-	<g class="artifact-boxes">
-		<rect x="18" y="111" width="132" height="58" />
-		<rect x="258" y="39" width="150" height="58" />
-		<rect x="258" y="183" width="150" height="58" />
-		<rect x="470" y="39" width="150" height="58" />
-		<rect x="470" y="183" width="150" height="58" />
-		<rect x="680" y="111" width="62" height="58" />
-	</g>
-
-	<g class="artifact-labels">
-		<text x="84" y="136" text-anchor="middle"><tspan x="84">INCIDENT</tspan><tspan x="84" dy="15">DATASET</tspan></text>
-		<text x="333" y="64" text-anchor="middle"><tspan x="333">SHARED</tspan><tspan x="333" dy="15">BASELINE INPUTS</tspan></text>
-		<text x="333" y="208" text-anchor="middle"><tspan x="333">TIMESTAMP-ELIGIBLE</tspan><tspan x="333" dy="15">GRAPH FEATURES</tspan></text>
-		<text x="545" y="64" text-anchor="middle"><tspan x="545">BASELINE</tspan><tspan x="545" dy="15">MODEL</tspan></text>
-		<text x="545" y="208" text-anchor="middle"><tspan x="545">GRAPH-ENRICHED</tspan><tspan x="545" dy="15">MODEL</tspan></text>
-		<text x="711" y="133" text-anchor="middle"><tspan x="711">TIME</tspan><tspan x="711" dy="15">SPLIT</tspan></text>
-	</g>
-
-	<g class="research-flow-notes">
-		<text x="258" y="119">same preprocessing and model configuration</text>
-		<text x="470" y="263">chronological holdout + expanding-window CV</text>
-	</g>
-</svg>
+<div class="study-flow" aria-label="Evaluation design: shared data, two model variants, and temporal evaluation">
+	<div class="study-stage study-stage--source" data-motion>
+		<p class="study-stage-label"><span>01</span> Shared data</p>
+		<div class="study-stage-content">
+			<h3>Incident dataset</h3>
+			<p>One dataset, shared baseline inputs and the same preprocessing.</p>
+			<DiagramArrow class="study-link--out" />
+		</div>
+	</div>
+	<div class="study-stage study-stage--models" data-motion>
+		<p class="study-stage-label"><span>02</span> Model comparison</p>
+		<div class="study-models">
+			<div class="study-model">
+				<h3>Baseline</h3>
+				<p>Shared inputs</p>
+			</div>
+			<div class="study-model study-model--enriched">
+				<h3>Graph-enriched</h3>
+				<p>Shared inputs <span class="study-addition">+ timestamp-eligible graph features</span></p>
+			</div>
+		</div>
+	</div>
+	<div class="study-stage study-stage--evaluation" data-motion>
+		<p class="study-stage-label"><span>03</span> Evaluation</p>
+		<div class="study-stage-content">
+			<h3>Temporal validation</h3>
+			<p>Chronological holdout and expanding-window cross-validation.</p>
+			<span class="study-constraint">Identical splits for both models</span>
+			<DiagramArrow class="study-link--in" />
+		</div>
+	</div>
+</div>

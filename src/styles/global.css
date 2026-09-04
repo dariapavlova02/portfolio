@@ -55,6 +55,17 @@ a:focus-visible {
 	outline-offset: 5px;
 }
 
+h1,
+h2,
+h3 {
+	text-wrap: balance;
+}
+
+p,
+li {
+	text-wrap: pretty;
+}
+
 .skip-link {
 	position: fixed;
 	top: 0.75rem;
@@ -196,19 +207,11 @@ a:focus-visible {
 	line-height: 0.93;
 }
 
-.intro-primary h1 span {
-	display: block;
-}
-
 .intro-territory {
+	max-width: 42rem;
 	margin: 0;
 	font-size: clamp(1rem, 1.25vw, 1.22rem);
 	line-height: 1.45;
-}
-
-.intro-territory span,
-.intro-secondary > p span {
-	display: block;
 }
 
 .intro-secondary {
@@ -220,6 +223,7 @@ a:focus-visible {
 }
 
 .intro-secondary > p {
+	max-width: 29rem;
 	margin: 0 0 0.85rem;
 	font-size: clamp(0.98rem, 1.16vw, 1.12rem);
 	line-height: 1.45;
@@ -744,11 +748,6 @@ a:focus-visible {
 		margin-top: 1.15rem;
 		font-size: clamp(2.8rem, 13vw, 4rem);
 		line-height: 0.95;
-	}
-
-	.intro-territory span,
-	.intro-secondary > p span {
-		display: inline;
 	}
 
 	.intro-secondary {

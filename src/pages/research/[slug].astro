@@ -7,6 +7,7 @@ import PublicationRegister from "../../components/PublicationRegister.astro";
 import ResearchFlow from "../../components/ResearchFlow.astro";
 import ResearchResultsPlot from "../../components/ResearchResultsPlot.astro";
 import { publications, type Publication } from "../../data/publications";
+import "../../styles/research.css";
 
 interface Props {
 	publication: Publication;
@@ -29,7 +30,7 @@ const otherPublications = publications.filter((item) => item.slug !== publicatio
 
 <BaseLayout title={`${publication.title} — Daria Pavlova`} description={publication.description}>
 	<Header current="research" />
-	<main id="main-content" class="interior-page page-frame">
+	<main id="main-content" class="interior-page page-frame research-page">
 		<header class="interior-intro research-intro" data-motion>
 			<p class="eyebrow">{publication.recordLabel}</p>
 			<h1>{publication.title}</h1>
@@ -87,10 +88,14 @@ const otherPublications = publications.filter((item) => item.slug !== publicatio
 
 		<section class="evidence-section evidence-section--figure" aria-labelledby="system-title" data-motion data-trace-rule>
 			<h2 class="mono-label" id="system-title">System view</h2>
-			<div class="evidence-section-body evidence-section-body--wide research-figure">
+			<figure class="evidence-section-body evidence-section-body--wide research-figure">
+				<header class="study-figure-heading">
+					<span class="mono-label">Figure 01</span>
+					<h3>{publication.artifact === "graph-evaluation" ? "One dataset. Two model variants." : "From source data to analytical views."}</h3>
+				</header>
 				{publication.artifact === "graph-evaluation" ? <ResearchFlow /> : <MarketDataFlow />}
-				<p class="figure-note">{publication.artifactNote}</p>
-			</div>
+				<figcaption class="figure-note"><p>{publication.artifactNote}</p></figcaption>
+			</figure>
 		</section>
 
 		<section class="evidence-section" aria-labelledby="method-title" data-motion data-trace-rule>
@@ -100,17 +105,13 @@ const otherPublications = publications.filter((item) => item.slug !== publicatio
 					{publication.method.map((step) => <li>{step}</li>)}
 				</ol>
 			</div>
-			<aside class="evidence-section-aside">
-				<p class="mono-label">Evidence status</p>
-				<p>{publication.results.reading}</p>
-			</aside>
 		</section>
 
 		<section class="evidence-section evidence-section--results" aria-labelledby="results-title" data-motion data-trace-rule>
 			<h2 class="mono-label" id="results-title">Results</h2>
 			<div class="evidence-section-body evidence-section-body--wide">
 				{publication.artifact === "graph-evaluation" && <ResearchResultsPlot />}
-				<div class="evidence-table-wrap">
+				<div class="evidence-table-wrap" tabindex="0" role="region" aria-label="Detailed results">
 					<table class="evidence-table">
 						<thead>
 							<tr>
@@ -119,12 +120,24 @@ const otherPublications = publications.filter((item) => item.slug !== publicatio
 						</thead>
 						<tbody>
 							{publication.results.rows.map((row) => (
-								<tr>{row.map((cell) => <td>{cell}</td>)}</tr>
+								<tr>{row.map((cell, index) => index === 0 ? <th scope="row">{cell}</th> : <td>{cell}</td>)}</tr>
 							))}
 						</tbody>
 					</table>
 				</div>
-				<p class="result-reading"><strong>Reading:</strong> {publication.results.reading}</p>
+				<div class="result-ledger" aria-label="Detailed results">
+					{publication.results.rows.map((row) => (
+						<section class="result-record">
+							<h3>{row[0]}</h3>
+							<dl>
+								{row.slice(1).map((cell, index) => (
+									<div><dt>{publication.results.columns[index + 1]}</dt><dd>{cell}</dd></div>
+								))}
+							</dl>
+						</section>
+					))}
+				</div>
+				<div class="result-reading"><span class="mono-label">Interpretation</span><p>{publication.results.reading}</p></div>
 			</div>
 		</section>
 

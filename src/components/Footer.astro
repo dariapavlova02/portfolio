@@ -1,12 +1,20 @@
 ---
 import { siteConfig } from "../config";
+import ContactMenu from "./ContactMenu.astro";
 ---
 
 <footer class="site-footer page-frame">
 	<p>© 2026 Daria Pavlova</p>
-	<nav aria-label="Footer navigation">
+	<nav class="footer-links" aria-label="Footer navigation">
 		<a href={siteConfig.githubUrl} target="_blank" rel="noreferrer">GitHub</a>
 		<a href={siteConfig.cvUrl}>CV</a>
-		<a href={siteConfig.contactUrl}>Email</a>
+		<ContactMenu placement="above" />
 	</nav>
 </footer>
+
+<style>
+	.footer-links { position: relative; }
+	@media (max-width: 720px) {
+		.footer-links { width: 100%; }
+	}
+</style>

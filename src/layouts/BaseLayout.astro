@@ -27,8 +27,8 @@ const {
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
 		<meta name="theme-color" content="#faf3e1" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="alternate icon" href="/favicon.ico" />
+		<link rel="icon" type="image/svg+xml" sizes="any" href="/favicon-dp.svg" />
+		<link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="/favicon-dp.ico" />
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
@@ -36,38 +36,58 @@ const {
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<title>{title}</title>
+		<script is:inline>
+			(() => {
+				const isReload = performance.getEntriesByType("navigation")[0]?.type === "reload";
+				history.scrollRestoration = isReload ? "manual" : "auto";
+				if (!isReload) return;
+				// Cancel both saved scroll position and fragment scrolling before layout.
+				if (location.hash) history.replaceState(history.state, "", location.pathname + location.search);
+				window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+			})();
+		</script>
 	</head>
 	<body>
 		<a class="skip-link" href="#main-content">Skip to content</a>
 		<slot />
 		<script is:inline>
 			(() => {
-				const header = document.querySelector("[data-sticky-header]");
-				if (header) {
-					const updateHeader = () => header.classList.toggle("is-scrolled", window.scrollY > 12);
-					updateHeader();
-					window.addEventListener("scroll", updateHeader, { passive: true });
-				}
+				const initializePage = () => {
+					if (performance.getEntriesByType("navigation")[0]?.type === "reload") {
+						window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+					}
+					const header = document.querySelector("[data-sticky-header]");
+					if (header) {
+						const updateHeader = () => header.classList.toggle("is-scrolled", window.scrollY > 12);
+						updateHeader();
+						window.addEventListener("scroll", updateHeader, { passive: true });
+					}
 
-				const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-				if (reducedMotion || !("IntersectionObserver" in window)) return;
+					const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+					if (reducedMotion || !("IntersectionObserver" in window)) return;
 
-				const targets = document.querySelectorAll("[data-motion]");
-				if (!targets.length) return;
+					const targets = document.querySelectorAll("[data-motion], .technical-artifact");
+					if (!targets.length) return;
 
-				document.documentElement.classList.add("motion-capable");
-				const observer = new IntersectionObserver(
-					(entries) => {
-						entries.forEach((entry) => {
-							if (!entry.isIntersecting) return;
-							entry.target.classList.add("is-in-view");
-							observer.unobserve(entry.target);
-						});
-					},
-					{ rootMargin: "0px 0px -4% 0px", threshold: 0.04 },
-				);
+					document.documentElement.classList.add("motion-capable");
+					const observer = new IntersectionObserver(
+						(entries) => {
+							entries.forEach((entry) => {
+								if (!entry.isIntersecting) return;
+								const isGraphic = entry.target.matches(".model-chart, .technical-artifact, .study-stage");
+								if (entry.intersectionRatio < (isGraphic ? 0.3 : 0.04)) return;
+								entry.target.classList.add("is-in-view");
+								observer.unobserve(entry.target);
+							});
+						},
+						{ rootMargin: "0px 0px -4% 0px", threshold: [0.04, 0.3] },
+					);
 
-				targets.forEach((target) => observer.observe(target));
+					targets.forEach((target) => observer.observe(target));
+				};
+				// Observe only after the browser has settled the initial scroll position.
+				if (document.readyState === "complete") initializePage();
+				else window.addEventListener("pageshow", initializePage, { once: true });
 			})();
 		</script>
 	</body>

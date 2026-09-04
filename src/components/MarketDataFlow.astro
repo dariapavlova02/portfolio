@@ -1,41 +1,37 @@
-<svg class="market-flow technical-artifact" viewBox="0 0 780 300" role="img" aria-labelledby="market-flow-title market-flow-desc">
-	<title id="market-flow-title">DeFi market analysis data flow</title>
-	<desc id="market-flow-desc">CoinGecko, DeFiLlama and DexScreener data pass through validation, transformation and analytical delivery stages.</desc>
-	<defs>
-		<marker id="market-flow-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
-			<path d="M0,0 L7,3.5 L0,7" class="artifact-arrowhead" />
-		</marker>
-	</defs>
+---
+import DiagramArrow from "./DiagramArrow.astro";
+---
 
-	<g class="artifact-lines" marker-end="url(#market-flow-arrow)">
-		<path d="M144 54 H190 V150 H234" />
-		<path d="M144 150 H234" />
-		<path d="M144 246 H190 V150 H234" />
-		<path d="M370 150 H422" />
-		<path d="M558 150 H610" />
-	</g>
-
-	<g class="artifact-boxes">
-		<rect x="18" y="27" width="126" height="54" />
-		<rect x="18" y="123" width="126" height="54" />
-		<rect x="18" y="219" width="126" height="54" />
-		<rect x="234" y="111" width="136" height="78" />
-		<rect x="422" y="111" width="136" height="78" />
-		<rect x="610" y="111" width="150" height="78" />
-	</g>
-
-	<g class="artifact-labels">
-		<text x="81" y="58" text-anchor="middle">COINGECKO</text>
-		<text x="81" y="154" text-anchor="middle">DEFILLAMA</text>
-		<text x="81" y="250" text-anchor="middle">DEXSCREENER</text>
-		<text x="302" y="140" text-anchor="middle"><tspan x="302">VALIDATE</tspan><tspan x="302" dy="16">4 QUALITY CHECKS</tspan></text>
-		<text x="490" y="132" text-anchor="middle"><tspan x="490">NORMALIZE</tspan><tspan x="490" dy="16">FEATURES</tspan><tspan x="490" dy="16">AGGREGATE</tspan></text>
-		<text x="685" y="140" text-anchor="middle"><tspan x="685">ANALYTICAL</tspan><tspan x="685" dy="16">VIEWS</tspan></text>
-	</g>
-
-	<g class="research-flow-notes">
-		<text x="18" y="294">three source APIs</text>
-		<text x="234" y="216">completeness · consistency · timeliness · outliers</text>
-		<text x="685" y="216" text-anchor="middle"><tspan x="685">overview · time series</tspan><tspan x="685" dy="14">movers · categories</tspan></text>
-	</g>
-</svg>
+<div class="study-flow study-flow--market" aria-label="Market data pipeline: source APIs, validation and transformation, and analytical views">
+	<div class="study-stage study-stage--source" data-motion>
+		<p class="study-stage-label"><span>01</span> Source APIs</p>
+		<div class="study-stage-content">
+			<h3>Market &amp; protocol data</h3>
+			<p>CoinGecko<br />DeFiLlama<br />DexScreener</p>
+			<DiagramArrow class="study-link--out" />
+		</div>
+	</div>
+	<div class="study-stage study-stage--models" data-motion>
+		<p class="study-stage-label"><span>02</span> Data processing</p>
+		<div class="study-models">
+			<div class="study-model">
+				<h3>Validate</h3>
+				<p>Completeness, consistency, timeliness and outliers.</p>
+			</div>
+			<div class="study-model study-model--enriched">
+				<DiagramArrow class="study-link--down" />
+				<h3>Transform</h3>
+				<p>Normalize timestamps, derive features and aggregate.</p>
+			</div>
+		</div>
+	</div>
+	<div class="study-stage study-stage--evaluation" data-motion>
+		<p class="study-stage-label"><span>03</span> Analytical delivery</p>
+		<div class="study-stage-content">
+			<h3>Coordinated views</h3>
+			<p>Overview, time series, movers and categories.</p>
+			<span class="study-constraint">Four connected analytical outputs</span>
+			<DiagramArrow class="study-link--in" />
+		</div>
+	</div>
+</div>
