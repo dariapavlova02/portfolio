@@ -1,0 +1,64 @@
+@media (prefers-reduced-motion: no-preference) {
+	.site-nav a::after {
+		transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.arrow-link span:last-child,
+	.index-link span:last-child {
+		transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.arrow-link:hover span:last-child,
+	.arrow-link:focus-visible span:last-child,
+	.index-link:hover span:last-child,
+	.index-link:focus-visible span:last-child {
+		transform: translateX(3px);
+	}
+
+	.index-link:not(.index-link--next):hover span:last-child,
+	.index-link:not(.index-link--next):focus-visible span:last-child {
+		transform: translateX(-3px);
+	}
+
+	.project-artifact .technical-artifact {
+		transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.project-row:hover .technical-artifact,
+	.project-row:focus-within .technical-artifact {
+		transform: translateX(2px);
+	}
+
+	html.motion-capable [data-motion] {
+		opacity: 0.88;
+		transform: translateY(7px);
+	}
+
+	html.motion-capable [data-motion].is-in-view {
+		opacity: 1;
+		transform: none;
+		transition:
+			opacity 420ms ease,
+			transform 460ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.evidence-table tbody tr,
+	.evidence-list li,
+	.research-meta a {
+		transition:
+			background-color 180ms ease,
+			color 180ms ease,
+			border-color 180ms ease;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		scroll-behavior: auto !important;
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}

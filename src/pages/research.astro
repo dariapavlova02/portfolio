@@ -1,0 +1,141 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import ResearchFlow from "../components/ResearchFlow.astro";
+
+const paperUrl = "https://aile3.ijs.si/dunja/SiKDD2025/Papers/IS2024_-_SIKDD_2025_paper_6.pdf";
+const repositoryUrl = "https://github.com/dariapavlova02/defi-security-knowledge-graph";
+
+const currentResults = [
+	{ model: "Baseline", auc: "0.823", f1: "0.545", precision: "0.611", recall: "0.491", temporal: "0.775 ± 0.090" },
+	{ model: "Graph-enriched", auc: "0.817", f1: "0.513", precision: "0.620", recall: "0.438", temporal: "0.787 ± 0.074" },
+];
+---
+
+<BaseLayout
+	title="Research — Daria Pavlova"
+	description="Leakage-aware evaluation of graph-derived protocol context for DeFi incident severity classification."
+>
+	<Header current="research" />
+	<main id="main-content" class="interior-page page-frame">
+		<header class="interior-intro research-intro" data-motion>
+			<p class="eyebrow">Research / evaluation record</p>
+			<h1>Graph-based feature engineering for DeFi security incident severity prediction</h1>
+			<p>Published research, followed by a stricter reproducible evaluation of what the available graph evidence supports.</p>
+		</header>
+
+		<section class="research-meta" aria-label="Publication metadata" data-motion>
+			<div>
+				<p class="mono-label">Authors</p>
+				<p>Daria Pavlova<br />Inna Novalija<br />Dunja Mladenić</p>
+			</div>
+			<div>
+				<p class="mono-label">Venue</p>
+				<p>Information Society 2025<br />Slovenian KDD Conference<br />Ljubljana, Slovenia</p>
+			</div>
+			<div>
+				<p class="mono-label">Access</p>
+				<ul>
+					<li><a href={paperUrl} target="_blank" rel="noreferrer">Paper (PDF) ↗</a></li>
+					<li><a href={repositoryUrl} target="_blank" rel="noreferrer">Code and artifacts ↗</a></li>
+				</ul>
+			</div>
+		</section>
+
+		<section class="research-comparison" aria-label="Published and corrected evaluation" data-motion>
+			<div>
+				<p class="mono-label">Reported conference result</p>
+				<p class="research-comparison-value">0.598 → 0.787</p>
+				<p>AUC reported by the 2025 paper using the archival conference profile.</p>
+			</div>
+			<div>
+				<p class="mono-label">Corrected chronological holdout</p>
+				<p class="research-comparison-value">0.823 / 0.817</p>
+				<p>Baseline / graph-enriched AUC under the timestamp-safe portfolio profile.</p>
+			</div>
+		</section>
+
+		<section class="evidence-section" aria-labelledby="question-title" data-motion>
+			<h2 class="mono-label" id="question-title">Research question</h2>
+			<div class="evidence-section-body">
+				<p class="evidence-lede">Does protocol context known before a DeFi security incident improve the ranking of incidents by severe financial loss?</p>
+				<p>The corrected experiment narrows the question to facts whose availability at prediction time can be demonstrated. Retrospective graph structure is not silently treated as historical evidence.</p>
+			</div>
+		</section>
+
+		<section class="evidence-section evidence-section--figure" aria-labelledby="system-title" data-motion>
+			<h2 class="mono-label" id="system-title">Evaluation system</h2>
+			<div class="evidence-section-body evidence-section-body--wide">
+				<ResearchFlow />
+				<p class="figure-note">Both models receive the same baseline inputs and deterministic LightGBM configuration. The enriched model adds only timestamp-eligible graph features.</p>
+			</div>
+		</section>
+
+		<section class="evidence-section" aria-labelledby="method-title" data-motion>
+			<h2 class="mono-label" id="method-title">Method</h2>
+			<div class="evidence-section-body">
+				<ol class="evidence-list">
+					<li>Build the corrected dataset from 1,608 normalized incidents dated 2011–2025.</li>
+					<li>Split observations chronologically at 2023-07-28 and fix the severe-loss threshold from the training period.</li>
+					<li>Require every graph feature to have an availability timestamp no later than the incident.</li>
+					<li>Evaluate a chronological holdout and five expanding-window temporal folds.</li>
+				</ol>
+			</div>
+			<aside class="evidence-section-aside">
+				<p class="mono-label">Eligible graph context</p>
+				<p>Count of strictly earlier incidents for the same protocol.</p>
+			</aside>
+		</section>
+
+		<section class="evidence-section" aria-labelledby="results-title" data-motion>
+			<h2 class="mono-label" id="results-title">Corrected results</h2>
+			<div class="evidence-section-body evidence-section-body--wide">
+				<div class="evidence-table-wrap">
+					<table class="evidence-table">
+						<thead>
+							<tr>
+								<th scope="col">Model</th>
+								<th scope="col">Holdout AUC</th>
+								<th scope="col">F1</th>
+								<th scope="col">Precision</th>
+								<th scope="col">Recall</th>
+								<th scope="col">Temporal CV AUC</th>
+							</tr>
+						</thead>
+						<tbody>
+							{currentResults.map((result) => (
+								<tr>
+									<td>{result.model}</td>
+									<td>{result.auc}</td>
+									<td>{result.f1}</td>
+									<td>{result.precision}</td>
+									<td>{result.recall}</td>
+									<td>{result.temporal}</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+				<p class="result-reading"><strong>Reading:</strong> graph enrichment did not improve the chronological holdout. Temporal CV was slightly higher on average, but variance and threshold sensitivity prevent a strong predictive claim.</p>
+			</div>
+		</section>
+
+		<section class="evidence-section" aria-labelledby="limits-title" data-motion>
+			<h2 class="mono-label" id="limits-title">Limits</h2>
+			<div class="evidence-section-body">
+				<ul class="evidence-list evidence-list--plain">
+					<li>Three structural graph features are excluded because their historical availability is undocumented.</li>
+					<li>Public incident coverage is incomplete and reported losses may be noisy or revised.</li>
+					<li>Raw source records are not redistributed because redistribution rights have not been established.</li>
+					<li>This is a research artifact, not a deployed risk-scoring or financial decision system.</li>
+				</ul>
+				<div class="evidence-actions">
+					<a class="arrow-link" href={repositoryUrl} target="_blank" rel="noreferrer"><span>Repository</span><span aria-hidden="true">→</span></a>
+					<a class="arrow-link" href={paperUrl} target="_blank" rel="noreferrer"><span>Published paper</span><span aria-hidden="true">→</span></a>
+				</div>
+			</div>
+		</section>
+	</main>
+	<Footer />
+</BaseLayout>

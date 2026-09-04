@@ -8,13 +8,13 @@ interface Props {
 const { project } = Astro.props;
 ---
 
-<section class="featured-evidence page-frame" aria-labelledby="featured-title">
+<section class="featured-evidence page-frame" aria-labelledby="featured-title" data-motion>
 	<div class="featured-index mono-label">{project.number}</div>
 	<div class="featured-summary">
 		<p class="mono-label">Featured project</p>
 		<h2 id="featured-title">{project.title}</h2>
 		<p class="featured-category">Large-scale data infrastructure</p>
-		<a class="arrow-link" href={`#${project.slug}`}>
+		<a class="arrow-link" href={`/work/${project.slug}`}>
 			<span>View case study</span><span aria-hidden="true">→</span>
 		</a>
 	</div>

@@ -4,6 +4,8 @@ import "@fontsource-variable/source-serif-4";
 import "@fontsource/ibm-plex-mono/400.css";
 import "@fontsource/ibm-plex-mono/500.css";
 import "../styles/global.css";
+import "../styles/evidence.css";
+import "../styles/motion.css";
 import { siteConfig } from "../config";
 
 interface Props {
@@ -36,5 +38,28 @@ const {
 	<body>
 		<a class="skip-link" href="#main-content">Skip to content</a>
 		<slot />
+		<script is:inline>
+			(() => {
+				const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+				if (reducedMotion || !("IntersectionObserver" in window)) return;
+
+				const targets = document.querySelectorAll("[data-motion]");
+				if (!targets.length) return;
+
+				document.documentElement.classList.add("motion-capable");
+				const observer = new IntersectionObserver(
+					(entries) => {
+						entries.forEach((entry) => {
+							if (!entry.isIntersecting) return;
+							entry.target.classList.add("is-in-view");
+							observer.unobserve(entry.target);
+						});
+					},
+					{ rootMargin: "0px 0px -4% 0px", threshold: 0.04 },
+				);
+
+				targets.forEach((target) => observer.observe(target));
+			})();
+		</script>
 	</body>
 </html>

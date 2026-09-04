@@ -1,0 +1,128 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import TechnicalArtifact from "../../components/TechnicalArtifact.astro";
+import { projects, type Project } from "../../data/projects";
+
+interface Props {
+	project: Project;
+	nextProject: Project;
+}
+
+export function getStaticPaths() {
+	return projects.map((project, index) => ({
+		params: { slug: project.slug },
+		props: {
+			project,
+			nextProject: projects[(index + 1) % projects.length],
+		},
+	}));
+}
+
+const { project, nextProject } = Astro.props;
+const [primaryFact, ...supportingFacts] = project.facts;
+const artifactLabels = {
+	pipeline: "Public architecture excerpt",
+	search: "Request-to-decision path",
+	graph: "Semantic relationship schema",
+};
+---
+
+<BaseLayout title={`${project.title} — Daria Pavlova`} description={project.description}>
+	<Header current="work" />
+	<main id="main-content" class="interior-page page-frame">
+		<header class="interior-intro case-intro" data-motion>
+			<p class="eyebrow">{project.category}</p>
+			<h1>{project.title}</h1>
+			<p>{project.statement}</p>
+		</header>
+
+		<section class="case-evidence" aria-label="Project evidence" data-motion>
+			<div class="case-evidence-primary">
+				<p class="mono-label">{primaryFact.label}</p>
+				<p class="case-evidence-value">{primaryFact.value}</p>
+				<p>{primaryFact.note}</p>
+			</div>
+			<div class="case-evidence-support">
+				{supportingFacts.length > 0 ? (
+					supportingFacts.map((fact) => (
+						<div>
+							<p class="mono-label">{fact.label}</p>
+							<p class="case-support-value">{fact.value}</p>
+							<p>{fact.note}</p>
+						</div>
+					))
+				) : (
+					<div class="case-evidence-status">
+						<p class="mono-label">Evidence status</p>
+						<p>{project.evidenceNote}</p>
+					</div>
+				)}
+			</div>
+		</section>
+
+		<figure class="case-artifact project-artifact" data-motion>
+			<figcaption>
+				<p class="mono-label">System view</p>
+				<span>{artifactLabels[project.artifact]}</span>
+			</figcaption>
+			<div class="case-artifact-canvas">
+				<TechnicalArtifact kind={project.artifact} />
+			</div>
+		</figure>
+
+		<section class="evidence-section" aria-labelledby="problem-title" data-motion>
+			<h2 class="mono-label" id="problem-title">Problem</h2>
+			<div class="evidence-section-body">
+				<p class="evidence-lede">{project.problem}</p>
+			</div>
+		</section>
+
+		<section class="evidence-section" aria-labelledby="approach-title" data-motion>
+			<h2 class="mono-label" id="approach-title">Engineering approach</h2>
+			<div class="evidence-section-body">
+				<ol class="evidence-list">
+					{project.approach.map((step) => <li>{step}</li>)}
+				</ol>
+			</div>
+			<aside class="evidence-section-aside">
+				<p class="mono-label">System</p>
+				<p>{project.system}</p>
+			</aside>
+		</section>
+
+		<section class="evidence-section" aria-labelledby="outcome-title" data-motion>
+			<h2 class="mono-label" id="outcome-title">What the evidence supports</h2>
+			<div class="evidence-section-body">
+				<p>{project.outcome}</p>
+				<div class="evidence-actions">
+					{project.repositoryUrl && (
+						<a class="arrow-link" href={project.repositoryUrl} target="_blank" rel="noreferrer">
+							<span>Repository</span><span aria-hidden="true">→</span>
+						</a>
+					)}
+					{project.researchUrl && (
+						<a class="arrow-link" href={project.researchUrl}>
+							<span>Research record</span><span aria-hidden="true">→</span>
+						</a>
+					)}
+				</div>
+			</div>
+		</section>
+
+		<nav class="case-nav" aria-label="Case study navigation" data-motion>
+			<a class="index-link" href="/work">
+				<span class="mono-label">Index</span>
+				<strong>All work</strong>
+				<span aria-hidden="true">←</span>
+			</a>
+			<a class="index-link index-link--next" href={`/work/${nextProject.slug}`}>
+				<span class="mono-label">Next project</span>
+				<strong>{nextProject.title}</strong>
+				<span aria-hidden="true">→</span>
+			</a>
+		</nav>
+	</main>
+	<Footer />
+</BaseLayout>
