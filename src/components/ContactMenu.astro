@@ -71,7 +71,7 @@ const { placement = "below" } = Astro.props;
 	summary:focus-visible { outline: 1px solid var(--ink); outline-offset: 5px; }
 	.contact-chevron { transition: transform 180ms ease; }
 	.contact-menu[open] .contact-chevron { transform: rotate(180deg); }
-	.contact-panel { position: absolute; z-index: 60; top: calc(100% + 1.75rem); right: 0; width: 180px; padding: 0.35rem; border: 1px solid var(--soft-rule); background: var(--paper); box-shadow: 0 6px 18px color-mix(in srgb, var(--ink) 5%, transparent); letter-spacing: 0; }
+	.contact-panel { position: absolute; z-index: 60; top: calc(100% + 1.75rem); right: 0; width: 180px; padding: 0.35rem; border: 1px solid var(--soft-rule); background: var(--paper); box-shadow: 0 6px 18px rgb(34 34 34 / 5%); letter-spacing: 0; }
 	.contact-panel::before { position: absolute; bottom: 100%; right: 0; left: 0; height: 1.75rem; content: ""; }
 	.contact-options { margin: 0; padding: 0; list-style: none; }
 	.contact-option { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 44px; padding: 0.7rem 0.85rem; font-family: var(--mono); font-size: 0.78rem; font-weight: 500; line-height: 1.4; letter-spacing: 0.055em; transition: background-color 160ms ease; }
