@@ -17,6 +17,17 @@ const {
 	title = siteConfig.title,
 	description = siteConfig.description,
 } = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? siteConfig.siteUrl);
+const personSchema = {
+	"@context": "https://schema.org",
+	"@type": "Person",
+	"@id": `${siteConfig.siteUrl}#person`,
+	name: siteConfig.name,
+	url: siteConfig.siteUrl,
+	jobTitle: "Data Engineer",
+	sameAs: [siteConfig.githubUrl, siteConfig.linkedinUrl],
+};
 ---
 
 <!doctype html>
@@ -26,6 +37,7 @@ const {
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalUrl} />
 		<meta name="theme-color" content="#fff5f5" />
 		<link rel="icon" type="image/svg+xml" sizes="any" href="/favicon-dp.svg" />
 		<link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="/favicon-dp.ico" />
@@ -36,6 +48,7 @@ const {
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<title>{title}</title>
+		<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 		<script is:inline>
 			(() => {
 				const isReload = performance.getEntriesByType("navigation")[0]?.type === "reload";

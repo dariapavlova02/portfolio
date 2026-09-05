@@ -92,7 +92,7 @@ export const projects: Project[] = [
 		outcome:
 			"The public repository is an engineering reference and screening aid, not a legal decision system. It exposes the pipeline through FastAPI and documents deployment, provenance and readiness constraints.",
 		system: "Python / FastAPI / Elasticsearch / multilingual NLP / optional vector search",
-		repositoryUrl: "https://github.com/dariapavlova02/hybrid-sanctions-search-engine",
+		repositoryUrl: "https://github.com/dariapavlova02/multilingual-sanctions-search",
 	},
 	{
 		number: "03",

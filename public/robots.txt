@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dariapavlova.me/sitemap-index.xml
