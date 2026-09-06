@@ -16,8 +16,8 @@
 
 	.arrow-link:hover span:last-child,
 	.arrow-link:focus-visible span:last-child,
-	.index-link:hover span:last-child,
-	.index-link:focus-visible span:last-child,
+	.index-link:hover .index-link-arrow,
+	.index-link:focus-visible .index-link-arrow,
 	.publication-entry:hover .publication-entry-action span,
 	.publication-entry:focus-visible .publication-entry-action span,
 	.research-context a:last-child:hover span,
@@ -25,8 +25,8 @@
 		transform: translateX(4px);
 	}
 
-	.index-link:not(.index-link--next):hover span:last-child,
-	.index-link:not(.index-link--next):focus-visible span:last-child,
+	.index-link:not(.index-link--next):hover .index-link-arrow,
+	.index-link:not(.index-link--next):focus-visible .index-link-arrow,
 	.research-context a:first-child:hover span,
 	.research-context a:first-child:focus-visible span {
 		transform: translateX(-4px);

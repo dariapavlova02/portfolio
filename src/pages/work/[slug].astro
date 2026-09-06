@@ -114,13 +114,17 @@ const artifactLabels = {
 		<nav class="case-nav" aria-label="Case study navigation" data-motion data-trace-rule>
 			<a class="index-link" href="/work">
 				<span class="mono-label">Index</span>
-				<strong>All work</strong>
-				<span aria-hidden="true">←</span>
+				<span class="index-link-title">
+					<span class="index-link-arrow" aria-hidden="true">←</span>
+					<strong>All work</strong>
+				</span>
 			</a>
 			<a class="index-link index-link--next" href={`/work/${nextProject.slug}`}>
 				<span class="mono-label">Next project</span>
-				<strong>{nextProject.title}</strong>
-				<span aria-hidden="true">→</span>
+				<span class="index-link-title">
+					<strong>{nextProject.title}</strong>
+					<span class="index-link-arrow" aria-hidden="true">→</span>
+				</span>
 			</a>
 		</nav>
 	</main>
