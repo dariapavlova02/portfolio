@@ -29,6 +29,13 @@ const personSchema = {
 	jobTitle: "Data Engineer",
 	sameAs: [siteConfig.githubUrl, siteConfig.linkedinUrl],
 };
+const websiteSchema = {
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	name: siteConfig.name,
+	alternateName: ["dariapavlova.me"],
+	url: siteConfig.siteUrl,
+};
 ---
 
 <!doctype html>
@@ -49,7 +56,8 @@ const personSchema = {
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<title>{title}</title>
-			{isHomePage && <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />}
+		{isHomePage && <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />}
+		{isHomePage && <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />}
 		<script is:inline>
 			(() => {
 				const isReload = performance.getEntriesByType("navigation")[0]?.type === "reload";
