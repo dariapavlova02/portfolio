@@ -6,6 +6,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
+const primaryFact = project.facts[0];
 ---
 
 <section class="featured-evidence page-frame" aria-labelledby="featured-title" data-motion>
@@ -13,18 +14,14 @@ const { project } = Astro.props;
 	<div class="featured-summary">
 		<p class="mono-label">Featured project</p>
 		<h2 id="featured-title">{project.title}</h2>
-		<p class="featured-category">Large-scale data infrastructure</p>
+		<p class="featured-category">{project.category}</p>
 		<a class="arrow-link" href={`/work/${project.slug}`}>
 			<span>View case study</span><span aria-hidden="true">→</span>
 		</a>
 	</div>
 	<div class="featured-scale">
-		<p class="mono-label">Scale</p>
-		<p class="scale-value">≈500,000,000</p>
-		<p class="scale-unit">records</p>
-		<p class="scale-context">
-			Multi-year regulatory dataset exported under memory and compute constraints
-			with strict validation requirements.
-		</p>
+		<p class="mono-label">{primaryFact.label}</p>
+		<p class="scale-value">{primaryFact.value}</p>
+		<p class="scale-context">{primaryFact.note}</p>
 	</div>
 </section>

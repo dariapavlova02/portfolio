@@ -1,4 +1,4 @@
-export type ArtifactKind = "pipeline" | "search" | "graph";
+export type ArtifactKind = "search" | "discovery" | "graph";
 
 export interface ProjectFact {
 	label: string;
@@ -27,58 +27,29 @@ export interface Project {
 export const projects: Project[] = [
 	{
 		number: "01",
-		slug: "nbu-registry-export",
-		category: "Data infrastructure",
-		title: "NBU Registry Export",
-		description:
-			"End-to-end export pipeline for approximately 500M records across multiple years of transactional data.",
-		artifact: "pipeline",
-		statement:
-			"A large registry export shaped by data volume, bounded compute and explicit validation boundaries.",
-		facts: [
-			{
-				label: "Public scale",
-				value: "≈500,000,000",
-				note: "records across a multi-year regulatory dataset",
-			},
-		],
-		problem:
-			"Exporting a multi-year registry at this scale changes the engineering problem: progress must be observable, work must stay bounded, and validation cannot be deferred until the end of the run.",
-		approach: [
-			"Partition extraction and transformation work so execution remains bounded and restartable.",
-			"Keep validation as an explicit system boundary before publishing downstream data.",
-			"Separate columnar output, object storage and analytical serving concerns.",
-		],
-		outcome:
-			"The approximate record count is the only public measurement currently presented. Benchmark conditions, implementation details and repository access will be added only when they can be documented precisely.",
-		system: "Extract / transform / validation / Parquet / S3 / StarRocks",
-		evidenceNote: "Detailed case study in preparation",
-	},
-	{
-		number: "02",
-		slug: "hybrid-sanctions-search",
+		slug: "multilingual-sanctions-search",
 		category: "Search / NLP",
-		title: "Hybrid Sanctions Search Engine",
+		title: "Multilingual Sanctions Search",
 		description:
-			"Search system for sanctions data using hybrid retrieval, entity resolution and relevance ranking.",
+			"Multilingual sanctions screening with lexical and vector search, source identity evidence, and reproducible NLP pipelines.",
 		artifact: "search",
 		statement:
-			"A multilingual screening reference that keeps normalization, retrieval and review boundaries explicit.",
+			"A multilingual screening reference that keeps normalization, retrieval and human review boundaries explicit.",
 		facts: [
 			{
 				label: "Language handling",
 				value: "EN / RU / UK",
-				note: "names, organizations and mixed-script inputs",
+				note: "normalized names, aliases and mixed-script inputs",
 			},
 			{
 				label: "Retrieval",
-				value: "Hybrid",
-				note: "exact, phrase and n-gram candidates with optional vector escalation",
+				value: "Lexical + vector",
+				note: "exact and fuzzy candidates with optional semantic escalation",
 			},
 			{
-				label: "Readiness boundary",
-				value: "HTTP 503",
-				note: "for empty or incompletely loaded screening indexes",
+				label: "Reference suite",
+				value: "1,739 passed",
+				note: "with two optional FAISS checks skipped in the recorded local run",
 			},
 		],
 		problem:
@@ -90,17 +61,57 @@ export const projects: Project[] = [
 			"Fail closed when the screening index is unavailable or incomplete.",
 		],
 		outcome:
-			"The public repository is an engineering reference and screening aid, not a legal decision system. It exposes the pipeline through FastAPI and documents deployment, provenance and readiness constraints.",
+			"The public repository is an engineering reference and screening aid. The recorded local reference suite checks implementation behavior; it does not establish search precision, recall or legal suitability.",
 		system: "Python / FastAPI / Elasticsearch / multilingual NLP / optional vector search",
 		repositoryUrl: "https://github.com/dariapavlova02/multilingual-sanctions-search",
 	},
 	{
-		number: "03",
-		slug: "semtrace",
-		category: "Semantic systems / AI research",
-		title: "SemTrace",
+		number: "02",
+		slug: "tender-vendor-discovery",
+		category: "Procurement intelligence",
+		title: "Tender Vendor Discovery",
 		description:
-			"Research and applied work on semantic systems, knowledge graphs and LLM-powered tools.",
+			"Procurement research pipeline for tender document processing, supplier discovery, contact enrichment and evidence review.",
+		artifact: "discovery",
+		statement:
+			"A review-oriented workflow that turns tender documents into traceable supplier candidates and supporting evidence.",
+		facts: [
+			{
+				label: "Candidate limit",
+				value: "500",
+				note: "default maximum entering enrichment and assessment in one run",
+			},
+			{
+				label: "Document inputs",
+				value: "PDF / DOCX / XLSX",
+				note: "tender requirements extracted from common office formats",
+			},
+			{
+				label: "Review outputs",
+				value: "CSV / XLSX / JSON",
+				note: "portable evidence for analyst review and handoff",
+			},
+		],
+		problem:
+			"Tender requirements are distributed across documents, while supplier evidence is fragmented across registries and the open web. Manual discovery is slow, repetitive and difficult to audit consistently.",
+		approach: [
+			"Extract product requirements and search terms from tender documents.",
+			"Build supplier candidates from company registries and web search, then deduplicate and filter them.",
+			"Enrich company and contact records before applying relevance assessment.",
+			"Preserve source evidence and export reviewable records for analyst decisions.",
+		],
+		outcome:
+			"The workflow was used in a commercial procurement setting. The public repository documents the implementation, while current external API compatibility and recommendation quality still require environment-specific evaluation.",
+		system: "Python / Streamlit / SQLAlchemy / PostgreSQL or SQLite / OpenAI / Serper",
+		repositoryUrl: "https://github.com/dariapavlova02/tender-vendor-discovery",
+	},
+	{
+		number: "03",
+		slug: "defi-security-knowledge-graph",
+		category: "Graph ML / Research",
+		title: "DeFi Security Knowledge Graph",
+		description:
+			"Leakage-aware graph feature engineering for DeFi security incident severity analysis.",
 		artifact: "graph",
 		statement:
 			"A leakage-aware test of whether graph-derived protocol context adds signal to DeFi incident severity classification.",
